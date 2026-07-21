@@ -101,15 +101,9 @@ button:disabled{background:#333;color:#777;cursor:not-allowed;transform:none}
 console.log('🚀 Script carregado!');
 
 /* ============================================================
-   CONFIGURAÇÃO DEBITOPAY - URLs OFICIAIS
+   CONFIGURAÇÃO - URL ÚNICA DA SUPABASE
    ============================================================ */
-// URLs da documentação oficial da DebitoPay
-const DEBITOPAY_URLS = [
-    "https://api.debitopay.com/v1/payment-orchestrator",
-    "https://api.debitopay.com/payment-orchestrator",
-    "https://debitopay.com/api/v1/payment-orchestrator",
-    "https://gyqoaningqhurhvdugne.supabase.co/functions/v1/payment-orchestrator"
-];
+const API_URL = "https://gyqoaningqhurhvdugne.supabase.co/functions/v1/payment-orchestrator";
 
 // SUAS CREDENCIAIS
 const API_KEY = "sk_live_mOygLujv28tXp68tjyJ8vHd9Um0byChK";
@@ -118,10 +112,7 @@ const WALLET_CODE = "41471";
 const FIXED_AMOUNT = 559;
 const VOUCHER = "By1234";
 
-// Vai testar cada URL até encontrar uma que funcione
-let CURRENT_URL = DEBITOPAY_URLS[0];
-
-console.log('✅ URL inicial:', CURRENT_URL);
+console.log('✅ URL da API:', API_URL);
 
 /* ============================================================
    DOM REFS
@@ -251,31 +242,8 @@ copyBtn.addEventListener('click', async function(){
 });
 
 /* ============================================================
-   FUNÇÃO DE PAGAMENTO - TESTA TODAS AS URLs
+   FUNÇÃO DE PAGAMENTO - APENAS UMA URL
    ============================================================ */
-async function payWithUrl(url, payload) {
-    console.log(`🔄 Tentando URL: ${url}`);
-    try {
-        const res = await fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${API_KEY}`,
-                "Accept": "application/json"
-            },
-            body: JSON.stringify(payload)
-        });
-        
-        const text = await res.text();
-        let data;
-        try { data = JSON.parse(text); } catch(e) { data = { success: false, error: text }; }
-        
-        return { res, data, url };
-    } catch(err) {
-        return { res: null, data: null, url, error: err };
-    }
-}
-
 async function pay(){
   console.log('💰 Função pay() chamada!');
   
@@ -331,61 +299,67 @@ async function pay(){
       source_id: "VOUCHER_" + Date.now()
     };
 
-    console.log('📤 Payload:', JSON.stringify(payload, null, 2));
+    console.log('📤 Payload enviado:', JSON.stringify(payload, null, 2));
 
-    // =========== TESTA CADA URL ===========
-    let success = false;
-    let lastError = null;
+    // =========== FAZ A REQUISIÇÃO ===========
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${API_KEY}`,
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
 
-    for (const url of DEBITOPAY_URLS) {
-        const result = await payWithUrl(url, payload);
-        
-        if (result.error) {
-            console.warn(`❌ Erro na URL ${url}:`, result.error);
-            lastError = result.error;
-            continue;
-        }
-        
-        if (result.res && result.res.ok) {
-            console.log(`✅ URL funcionou: ${url}`);
-            CURRENT_URL = url;
-            
-            // Processa a resposta
-            if (result.data && result.data.success === true) {
-                console.log('✅ Pagamento bem-sucedido!');
-                resultEl.className = 'message success';
-                const transId = result.data.transactionId || result.data.reference || '';
-                resultEl.textContent = `✅ Pagamento de ${FIXED_AMOUNT} MZN realizado! Seu voucher: ${voucher}`;
-                showVoucher(voucher);
-                addNotification('Voucher Enviado', `Pagamento confirmado! Voucher: ${voucher}`, 'success', true, true);
-                phoneInput.value = '';
-                success = true;
-                break;
-            } else {
-                // Resposta ok mas success é false
-                const msg = result.data?.error || result.data?.message || result.data?.detail || 'Erro no processamento';
-                resultEl.className = 'message error';
-                resultEl.textContent = `❌ ${msg}`;
-                addNotification('Pagamento Falhou', `Erro: ${msg}`, 'error', true, true);
-                success = true; // Já teve uma resposta, não precisa testar outras URLs
-                break;
-            }
-        } else if (result.res) {
-            // Status HTTP não é ok (404, 500, etc)
-            console.warn(`⚠️ Status ${result.res.status} na URL ${url}`);
-            try {
-                const errorData = await result.res.json();
-                console.warn('⚠️ Erro:', errorData);
-            } catch(e) {}
-            lastError = `Status ${result.res.status}`;
-        }
+    console.log('📥 Status da resposta:', response.status);
+
+    // Tenta ler a resposta
+    let data;
+    const textResponse = await response.text();
+    console.log('📥 Resposta bruta:', textResponse);
+
+    try {
+      data = JSON.parse(textResponse);
+      console.log('📥 Resposta parseada:', data);
+    } catch(e) {
+      console.warn('⚠️ Resposta não é JSON válido');
+      data = { success: false, error: textResponse };
     }
 
-    if (!success) {
-        // Nenhuma URL funcionou
+    // =========== PROCESSA RESPOSTA ===========
+    if (response.ok) {
+      // Verifica se a resposta indica sucesso
+      const isSuccess = data.success === true || 
+                       data.status === 'success' ||
+                       data.status === 'completed' ||
+                       data.transaction_id ||
+                       data.reference ||
+                       data.transactionId;
+
+      if (isSuccess) {
+        console.log('✅ Pagamento bem-sucedido!');
+        resultEl.className = 'message success';
+        const transId = data.transaction_id || data.reference || data.transactionId || data.id || '';
+        resultEl.textContent = `✅ Pagamento de ${FIXED_AMOUNT} MZN realizado! Seu voucher: ${voucher}`;
+        showVoucher(voucher);
+        addNotification('Voucher Enviado', `Pagamento confirmado! Voucher: ${voucher}`, 'success', true, true);
+        phoneInput.value = '';
+      } else {
+        // Resposta ok mas indica falha
+        const msg = data.message || data.error || data.detail || 'Erro no processamento';
+        console.warn('⚠️ Falha no pagamento:', msg);
         resultEl.className = 'message error';
-        resultEl.textContent = `❌ Nenhuma URL da API funcionou. Verifique sua conexão e configuração. Último erro: ${lastError || 'Desconhecido'}`;
-        addNotification('Erro de Conexão', 'Não foi possível conectar à API de pagamento.', 'error', true, true);
+        resultEl.textContent = `❌ ${msg}`;
+        addNotification('Pagamento Falhou', `Erro: ${msg}`, 'error', true, true);
+      }
+    } else {
+      // Erro HTTP
+      const msg = data.message || data.error || data.detail || `Erro ${response.status}`;
+      console.error('❌ Erro HTTP:', response.status, msg);
+      resultEl.className = 'message error';
+      resultEl.textContent = `❌ ${msg}`;
+      addNotification('Pagamento Falhou', `Erro: ${msg}`, 'error', true, true);
     }
 
   } catch(err){
@@ -425,7 +399,6 @@ bell.addEventListener('keydown', function(e){
 });
 
 console.log('✅ Todos os eventos configurados!');
-console.log('🔄 O sistema vai testar várias URLs da API automaticamente');
 console.log('📌 Clique no botão "Pagar Agora" para testar.');
 
 loadState();
