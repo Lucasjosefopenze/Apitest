@@ -48,6 +48,7 @@ button:disabled{background:#333;color:#777;cursor:not-allowed;transform:none}
 .voucher-box{margin-top:14px;background:linear-gradient(180deg,#0f1311,#0b0f0c);padding:12px;border-radius:10px;border:1px solid rgba(0,255,136,.06);display:none}
 .voucher-code{font-weight:800;color:#00ff88;font-size:18px;letter-spacing:1px}
 .copy-btn{margin-top:8px;padding:8px 10px;border-radius:8px;border:0;background:#00ff88;color:#001;font-weight:700;cursor:pointer}
+.debug-box{background:#0a0a0a;padding:8px;border-radius:6px;margin-top:8px;font-size:11px;color:#888;text-align:left;max-height:100px;overflow:auto;display:none}
 @media(max-width:520px){.notif-panel{right:10px;left:10px;width:auto}.nav{right:10px}.bell-wrap{width:48px;height:48px}}
 </style>
 </head>
@@ -94,6 +95,7 @@ button:disabled{background:#333;color:#777;cursor:not-allowed;transform:none}
     <button id="copyBtn" class="copy-btn" aria-label="Copiar voucher">Copiar</button>
   </div>
   <div id="result" role="status" aria-live="polite" style="margin-top:10px"></div>
+  <div id="debugBox" class="debug-box"></div>
   <div class="footer">© <strong>Eloon Musk</strong> - dev</div>
 </div>
 
@@ -101,9 +103,20 @@ button:disabled{background:#333;color:#777;cursor:not-allowed;transform:none}
 console.log('🚀 Script carregado!');
 
 /* ============================================================
-   CONFIGURAÇÃO - URL ÚNICA DA SUPABASE
+   CONFIGURAÇÃO - VÁRIAS OPÇÕES DE URL PARA TESTAR
    ============================================================ */
-const API_URL = "https://gyqoaningqhurhvdugne.supabase.co/functions/v1/payment-orchestrator";
+// 🔧 TESTE ESTAS URLs - UMA DELAS DEVE FUNCIONAR
+const URL_OPTIONS = [
+    "https://gyqoaningqhurhvdugne.supabase.co/functions/v1/payment-orchestrator",
+    "https://gyqoaningqhurhvdugne.supabase.co/functions/v1",
+    "https://gyqoaningqhurhvdugne.supabase.co/functions/v1/payment",
+    "https://gyqoaningqhurhvdugne.supabase.co/functions/v1/process",
+    "https://gyqoaningqhurhvdugne.supabase.co/functions/v1/mpesa",
+    "https://gyqoaningqhurhvdugne.supabase.co/functions/v1/pay"
+];
+
+// Use a primeira como padrão
+let CURRENT_URL = URL_OPTIONS[0];
 
 // SUAS CREDENCIAIS
 const API_KEY = "sk_live_mOygLujv28tXp68tjyJ8vHd9Um0byChK";
@@ -112,7 +125,7 @@ const WALLET_CODE = "41471";
 const FIXED_AMOUNT = 559;
 const VOUCHER = "By1234";
 
-console.log('✅ URL da API:', API_URL);
+console.log('✅ URLs para testar:', URL_OPTIONS);
 
 /* ============================================================
    DOM REFS
@@ -127,6 +140,7 @@ const voucherCodeEl = document.getElementById('voucherCode');
 const copyBtn = document.getElementById('copyBtn');
 const loader = document.getElementById('loader');
 const resultEl = document.getElementById('result');
+const debugBox = document.getElementById('debugBox');
 const payBtn = document.getElementById('payBtn');
 const phoneInput = document.getElementById('phone');
 
@@ -241,11 +255,18 @@ copyBtn.addEventListener('click', async function(){
   }
 });
 
+function showDebug(msg){
+  debugBox.style.display = 'block';
+  debugBox.textContent = msg;
+  console.log('🐛 DEBUG:', msg);
+}
+
 /* ============================================================
-   FUNÇÃO DE PAGAMENTO - APENAS UMA URL
+   FUNÇÃO DE PAGAMENTO - TESTA TODAS AS URLs
    ============================================================ */
 async function pay(){
   console.log('💰 Função pay() chamada!');
+  debugBox.style.display = 'none';
   
   try {
     // Limpar resultado anterior
@@ -299,67 +320,89 @@ async function pay(){
       source_id: "VOUCHER_" + Date.now()
     };
 
-    console.log('📤 Payload enviado:', JSON.stringify(payload, null, 2));
+    console.log('📤 Payload:', JSON.stringify(payload, null, 2));
+    showDebug('📤 Testando URLs...');
 
-    // =========== FAZ A REQUISIÇÃO ===========
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${API_KEY}`,
-        "Accept": "application/json"
-      },
-      body: JSON.stringify(payload)
-    });
+    // =========== TESTA CADA URL ===========
+    let success = false;
+    let lastError = null;
+    let workingUrl = null;
 
-    console.log('📥 Status da resposta:', response.status);
+    for (let i = 0; i < URL_OPTIONS.length; i++) {
+      const url = URL_OPTIONS[i];
+      console.log(`🔄 [${i+1}/${URL_OPTIONS.length}] Testando: ${url}`);
+      showDebug(`🔄 Testando URL ${i+1}/${URL_OPTIONS.length}: ${url}`);
+      
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${API_KEY}`,
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
 
-    // Tenta ler a resposta
-    let data;
-    const textResponse = await response.text();
-    console.log('📥 Resposta bruta:', textResponse);
+        console.log(`📥 [${url}] Status:`, response.status);
+        showDebug(`📥 Status ${response.status} para ${url}`);
 
-    try {
-      data = JSON.parse(textResponse);
-      console.log('📥 Resposta parseada:', data);
-    } catch(e) {
-      console.warn('⚠️ Resposta não é JSON válido');
-      data = { success: false, error: textResponse };
+        if (response.ok) {
+          const text = await response.text();
+          console.log(`📥 [${url}] Resposta:`, text);
+          
+          let data;
+          try { data = JSON.parse(text); } catch(e) { data = { raw: text }; }
+          
+          // Verifica se é sucesso
+          const isSuccess = data.success === true || 
+                           data.status === 'success' ||
+                           data.status === 'completed' ||
+                           data.transaction_id ||
+                           data.reference ||
+                           data.transactionId;
+
+          if (isSuccess) {
+            console.log(`✅ URL funcionou: ${url}`);
+            workingUrl = url;
+            success = true;
+            
+            resultEl.className = 'message success';
+            const transId = data.transaction_id || data.reference || data.transactionId || data.id || '';
+            resultEl.textContent = `✅ Pagamento de ${FIXED_AMOUNT} MZN realizado! Seu voucher: ${voucher}`;
+            showVoucher(voucher);
+            addNotification('Voucher Enviado', `Pagamento confirmado! Voucher: ${voucher}`, 'success', true, true);
+            phoneInput.value = '';
+            showDebug(`✅ Sucesso! URL: ${url}`);
+            break;
+          } else {
+            // Resposta ok mas erro de negócio
+            const msg = data.message || data.error || data.detail || 'Erro no processamento';
+            console.warn(`⚠️ [${url}] Falha:`, msg);
+            lastError = msg;
+            // Continua testando outras URLs
+          }
+        } else {
+          // Status não é 2xx
+          const text = await response.text();
+          console.warn(`⚠️ [${url}] Erro ${response.status}:`, text);
+          lastError = `Status ${response.status}`;
+          // Continua testando outras URLs
+        }
+      } catch(err) {
+        console.error(`❌ [${url}] Exceção:`, err.message);
+        lastError = err.message;
+        // Continua testando outras URLs
+      }
     }
 
-    // =========== PROCESSA RESPOSTA ===========
-    if (response.ok) {
-      // Verifica se a resposta indica sucesso
-      const isSuccess = data.success === true || 
-                       data.status === 'success' ||
-                       data.status === 'completed' ||
-                       data.transaction_id ||
-                       data.reference ||
-                       data.transactionId;
-
-      if (isSuccess) {
-        console.log('✅ Pagamento bem-sucedido!');
-        resultEl.className = 'message success';
-        const transId = data.transaction_id || data.reference || data.transactionId || data.id || '';
-        resultEl.textContent = `✅ Pagamento de ${FIXED_AMOUNT} MZN realizado! Seu voucher: ${voucher}`;
-        showVoucher(voucher);
-        addNotification('Voucher Enviado', `Pagamento confirmado! Voucher: ${voucher}`, 'success', true, true);
-        phoneInput.value = '';
-      } else {
-        // Resposta ok mas indica falha
-        const msg = data.message || data.error || data.detail || 'Erro no processamento';
-        console.warn('⚠️ Falha no pagamento:', msg);
-        resultEl.className = 'message error';
-        resultEl.textContent = `❌ ${msg}`;
-        addNotification('Pagamento Falhou', `Erro: ${msg}`, 'error', true, true);
-      }
-    } else {
-      // Erro HTTP
-      const msg = data.message || data.error || data.detail || `Erro ${response.status}`;
-      console.error('❌ Erro HTTP:', response.status, msg);
+    // =========== VERIFICA RESULTADO FINAL ===========
+    if (!success) {
+      console.error('❌ Nenhuma URL funcionou');
       resultEl.className = 'message error';
-      resultEl.textContent = `❌ ${msg}`;
-      addNotification('Pagamento Falhou', `Erro: ${msg}`, 'error', true, true);
+      resultEl.textContent = `❌ Nenhuma URL da API funcionou. Último erro: ${lastError || 'Desconhecido'}`;
+      addNotification('Erro de Conexão', `Nenhuma URL funcionou. Erro: ${lastError || 'Desconhecido'}`, 'error', true, true);
+      showDebug(`❌ Falha total. Último erro: ${lastError}`);
     }
 
   } catch(err){
@@ -367,6 +410,7 @@ async function pay(){
     resultEl.className = 'message error';
     resultEl.textContent = '❌ ' + (err.message || 'Erro desconhecido');
     addNotification('Erro no Pagamento', err.message || 'Erro desconhecido', 'error', true, true);
+    showDebug(`❌ Erro: ${err.message}`);
   } finally {
     console.log('🔄 Finalizando processo...');
     loader.style.display = 'none';
@@ -400,6 +444,7 @@ bell.addEventListener('keydown', function(e){
 
 console.log('✅ Todos os eventos configurados!');
 console.log('📌 Clique no botão "Pagar Agora" para testar.');
+console.log('📌 O sistema vai testar TODAS as URLs listadas');
 
 loadState();
 </script>
