@@ -4,52 +4,97 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Checkout Sistema Cashout ✔</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:20px;background:linear-gradient(135deg,#000000,#0a0a0a,#0f2027);color:#e0e0e0}
-.container{width:100%;max-width:480px;background:#1a1a1a;border-radius:16px;padding:32px;box-shadow:0 6px 20px rgba(0,255,128,.2);animation:fadeIn .5s ease-in-out;transition:.3s;text-align:center}
-@keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
-.logo{margin-bottom:20px}.logo-text{font-size:22px;font-weight:700;color:#00ff88;text-shadow:0 0 8px #00ff88,0 0 12px #00ff88;letter-spacing:1px}
-h1{font-size:20px;font-weight:600;margin-bottom:12px;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px}
-h1 svg{width:22px;height:22px;fill:#00ff88}
-p{font-size:14.5px;margin-bottom:24px;color:#ccc}
-.amount-highlight{font-size:20px;color:#00ff88;font-weight:700;background:#111;padding:12px;border-radius:12px;border:2px solid #00ff88;box-shadow:0 0 12px rgba(0,255,136,.5);text-align:center;margin-bottom:16px}
-.form-group{margin-bottom:16px;text-align:left}
-label{display:block;margin-bottom:8px;font-size:14px;font-weight:500;color:#ccc}
-input{width:100%;padding:12px 14px;font-size:16px;border:1px solid #444;border-radius:10px;outline:none;background:#222;color:#fff;transition:.2s}
-input:focus{border-color:#00ff88;box-shadow:0 0 0 2px rgba(0,255,136,.3)}
-button{width:100%;padding:14px;background:linear-gradient(135deg,#00ff88,#008844);color:#000;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;transition:.25s;letter-spacing:.3px}
-button:hover{background:linear-gradient(135deg,#00ff88,#00cc66);transform:translateY(-1px)}
-button:disabled{background:#333;color:#777;cursor:not-allowed;transform:none}
-.message{margin-top:12px;padding:10px;border-radius:10px;font-size:14px;text-align:center;font-weight:500}
-.success{background:#003300;color:#00ff88;border:1px solid #00ff88}
-.error{background:#330000;color:#ff5555;border:1px solid #ff5555}
-.loader{display:none;text-align:center;margin:12px 0}
-.loader:after{content:" ";width:22px;height:22px;border:3px solid #222;border-top:3px solid #00ff88;border-radius:50%;display:inline-block;animation:spin 1s linear infinite;margin-left:10px}
-@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
-.footer{margin-top:18px;text-align:center;font-size:12px;color:#00ff88;font-weight:500}
-.footer strong{color:#fff}
-.nav{position:fixed;top:18px;right:18px;z-index:1200;display:flex;flex-direction:column;align-items:flex-end}
-.bell-wrap{width:56px;height:56px;border-radius:50%;background:linear-gradient(180deg,#0f1310,#08100b);border:1px solid rgba(0,255,136,.06);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.6),0 0 20px rgba(0,255,136,.04);cursor:pointer;position:relative;overflow:visible;transition:transform .18s ease,box-shadow .18s ease}
-.bell-wrap:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,255,136,.12)}
-.bell-glow{position:absolute;inset:-8px;border-radius:50%;pointer-events:none;box-shadow:0 0 12px rgba(0,255,136,.06),0 0 28px rgba(0,255,136,.03);opacity:0;transition:opacity .25s ease}
-.bell-wrap.attention .bell-glow{opacity:1;animation:glowPulse 1.4s ease-in-out 2}
-@keyframes glowPulse{0%{transform:scale(.95);opacity:.95}50%{transform:scale(1.08);opacity:1}100%{transform:scale(.95);opacity:.95}}
-.badge{position:absolute;top:-8px;right:-8px;background:#00ff88;color:#001;padding:5px 8px;border-radius:999px;font-size:12px;font-weight:700;box-shadow:0 6px 18px rgba(0,255,136,.12);display:none;color:#041}
-.bell-wrap.ring{animation:ring 0.7s ease 1}
-@keyframes ring{0%{transform:rotate(0)}15%{transform:rotate(12deg)}30%{transform:rotate(-10deg)}45%{transform:rotate(6deg)}60%{transform:rotate(-4deg)}75%{transform:rotate(2deg)}100%{transform:rotate(0)}}
-.notif-panel{position:fixed;top:82px;right:18px;width:320px;background:#111;border:1px solid rgba(255,255,255,.03);border-radius:12px;box-shadow:0 14px 40px rgba(2,6,23,0.6);padding:12px;display:none;z-index:1201}
-.notif-panel h4{margin:0 0 8px 0;color:#00ff88;font-weight:700}
-.notif-list{max-height:320px;overflow:auto;padding-right:4px}
-.notif-item{background:#0f1111;padding:10px;border-radius:8px;margin-bottom:10px;border-left:3px solid #00ff88;color:#dfffe0;font-size:14px}
-.notif-item.error{border-left-color:#ff5a5a;color:#ffd0d0}
-.notif-muted{color:#94a3b8;font-size:13px;padding:8px}
-.voucher-box{margin-top:14px;background:linear-gradient(180deg,#0f1311,#0b0f0c);padding:12px;border-radius:10px;border:1px solid rgba(0,255,136,.06);display:none}
-.voucher-code{font-weight:800;color:#00ff88;font-size:18px;letter-spacing:1px}
-.copy-btn{margin-top:8px;padding:8px 10px;border-radius:8px;border:0;background:#00ff88;color:#001;font-weight:700;cursor:pointer}
-.debug-box{background:#0a0a0a;padding:8px;border-radius:6px;margin-top:8px;font-size:11px;color:#888;text-align:left;max-height:100px;overflow:auto;display:none}
-@media(max-width:520px){.notif-panel{right:10px;left:10px;width:auto}.nav{right:10px}.bell-wrap{width:48px;height:48px}}
+body{font-family:'Inter',sans-serif;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:20px;background:#0a0a0f;color:#e8e8e8}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 0%,rgba(0,255,136,0.03),transparent 70%),radial-gradient(ellipse at 80% 80%,rgba(0,255,136,0.02),transparent 50%);pointer-events:none;z-index:0}
+.container{width:100%;max-width:440px;background:linear-gradient(165deg,#14141a,#1a1a22);border-radius:24px;padding:36px 28px;position:relative;z-index:1;border:1px solid rgba(255,255,255,0.04);box-shadow:0 25px 60px rgba(0,0,0,0.8),inset 0 1px 0 rgba(255,255,255,0.03)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px) scale(0.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.container{animation:fadeIn .6s cubic-bezier(.16,1,.3,1)}
+.header-image{width:100%;border-radius:16px;margin-bottom:22px;border:1px solid rgba(255,255,255,0.06);display:block}
+.brand{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.05)}
+.brand-left{display:flex;align-items:center;gap:12px}
+.brand-icon{width:40px;height:40px;background:linear-gradient(135deg,#00ff88,#00cc77);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#0a0a0f;box-shadow:0 4px 15px rgba(0,255,136,0.2)}
+.brand-text{font-size:18px;font-weight:700;letter-spacing:-0.5px;background:linear-gradient(135deg,#fff,#a0b0a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.brand-badge{font-size:10px;font-weight:600;color:#00ff88;background:rgba(0,255,136,0.08);padding:4px 12px;border-radius:100px;border:1px solid rgba(0,255,136,0.1);letter-spacing:0.5px;text-transform:uppercase}
+h1{font-size:22px;font-weight:600;margin-bottom:6px;color:#fff;letter-spacing:-0.3px}
+.subtitle{font-size:14px;color:#8899aa;font-weight:400;margin-bottom:24px}
+.amount-card{background:linear-gradient(135deg,#0f1a14,#0a120e);border-radius:16px;padding:20px 24px;margin-bottom:20px;border:1px solid rgba(0,255,136,0.08);display:flex;justify-content:space-between;align-items:center}
+.amount-label{font-size:13px;color:#8899aa;font-weight:500}
+.amount-value{font-size:28px;font-weight:800;color:#00ff88;letter-spacing:-0.5px;text-shadow:0 0 30px rgba(0,255,136,0.1)}
+.amount-value span{font-size:16px;font-weight:600;color:#556;margin-left:4px}
+.mpesa-notice{background:rgba(0,255,136,0.03);border-radius:12px;padding:14px 18px;margin-bottom:22px;border-left:3px solid #00ff88;display:flex;align-items:flex-start;gap:12px}
+.mpesa-notice svg{flex-shrink:0;margin-top:1px}
+.mpesa-notice p{font-size:13px;color:#99aabb;line-height:1.5}
+.mpesa-notice strong{color:#00ff88;font-weight:600}
+.form-group{margin-bottom:18px}
+label{display:block;margin-bottom:6px;font-size:13px;font-weight:500;color:#99aabb}
+.input-wrap{position:relative}
+.input-wrap .prefix{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#556;font-size:14px;font-weight:500}
+input{width:100%;padding:14px 16px 14px 52px;font-size:15px;border:1px solid rgba(255,255,255,0.06);border-radius:12px;outline:none;background:rgba(255,255,255,0.03);color:#fff;transition:all .25s;font-weight:500}
+input:focus{border-color:#00ff88;background:rgba(0,255,136,0.03);box-shadow:0 0 0 4px rgba(0,255,136,0.05)}
+input::placeholder{color:#445}
+input.error{border-color:#ff4455;background:rgba(255,68,85,0.05)}
+/* ===== BOTÃO MELHORADO ===== */
+button{width:100%;padding:16px 20px;background:linear-gradient(135deg,#00ff88,#00cc77);color:#0a0a0f;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:all .3s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden;letter-spacing:0.3px;display:flex;align-items:center;justify-content:center;gap:10px}
+button .btn-icon{font-size:18px;transition:transform .3s}
+button .btn-text{transition:opacity .3s}
+button::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);transition:left .5s}
+button:hover::before{left:100%}
+button:hover{transform:translateY(-2px);box-shadow:0 8px 35px rgba(0,255,136,0.25)}
+button:active{transform:translateY(0) scale(0.98)}
+button:disabled{background:linear-gradient(135deg,#2a2a32,#1e1e26);color:#556;cursor:not-allowed;transform:none;box-shadow:none}
+button:disabled::before{display:none}
+button:disabled .btn-icon{animation:pulseIcon 1.2s ease-in-out infinite}
+@keyframes pulseIcon{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+/* ===== LOADER CENTRALIZADO ===== */
+.loader-wrapper{display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px 0 10px;gap:14px}
+.loader-wrapper.active{display:flex;animation:fadeIn .3s ease}
+.loader-ring{position:relative;width:48px;height:48px}
+.loader-ring .ring{position:absolute;width:100%;height:100%;border-radius:50%;border:3px solid transparent;border-top-color:#00ff88;animation:spinRing 0.8s cubic-bezier(.6,0,.4,1) infinite}
+.loader-ring .ring:nth-child(2){width:70%;height:70%;top:15%;left:15%;border-top-color:#00cc77;animation-duration:1s;animation-direction:reverse}
+@keyframes spinRing{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+.loader-text{color:#8899aa;font-size:13px;font-weight:500;text-align:center;line-height:1.5;max-width:280px}
+.loader-text strong{color:#00ff88;font-weight:600}
+.loader-text .dots::after{content:'...';animation:dots 1.4s steps(4) infinite}
+@keyframes dots{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}100%{content:''}}
+/* ===== MENSAGEM ===== */
+.message{margin-top:14px;padding:14px 18px;border-radius:12px;font-size:14px;text-align:center;font-weight:500;animation:fadeIn .3s ease}
+.success{background:rgba(0,255,136,0.06);color:#00ff88;border:1px solid rgba(0,255,136,0.1)}
+.error{background:rgba(255,68,85,0.06);color:#ff5566;border:1px solid rgba(255,68,85,0.1)}
+/* ===== VOUCHER ===== */
+.voucher-box{margin-top:18px;background:linear-gradient(135deg,#0f1a14,#0a120e);padding:20px;border-radius:16px;border:1px solid rgba(0,255,136,0.08);display:none;animation:fadeIn .4s ease}
+.voucher-label{font-size:12px;color:#8899aa;text-transform:uppercase;letter-spacing:1px;font-weight:600}
+.voucher-code{font-size:26px;font-weight:800;color:#00ff88;letter-spacing:2px;margin:8px 0 12px;font-family:'Inter',monospace;text-shadow:0 0 40px rgba(0,255,136,0.05)}
+.copy-btn{padding:8px 20px;border-radius:8px;border:0;background:rgba(0,255,136,0.08);color:#00ff88;font-weight:600;cursor:pointer;font-size:13px;transition:all .2s}
+.copy-btn:hover{background:rgba(0,255,136,0.15)}
+.footer{margin-top:22px;text-align:center;font-size:12px;color:#445;padding-top:18px;border-top:1px solid rgba(255,255,255,0.03)}
+.footer strong{color:#667}
+/* ===== NOTIFICAÇÕES ===== */
+.nav{position:fixed;top:20px;right:20px;z-index:1200;display:flex;flex-direction:column;align-items:flex-end}
+.bell-wrap{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,0.4);cursor:pointer;position:relative;transition:all .2s;backdrop-filter:blur(12px)}
+.bell-wrap:hover{background:rgba(255,255,255,0.05);transform:scale(1.05)}
+.bell-wrap.attention{animation:glowPulse 1.4s ease-in-out 2}
+@keyframes glowPulse{0%{box-shadow:0 0 0 0 rgba(0,255,136,0.2)}50%{box-shadow:0 0 30px 8px rgba(0,255,136,0.05)}100%{box-shadow:0 0 0 0 rgba(0,255,136,0.2)}}
+.bell-wrap.ring{animation:ring 0.6s ease 1}
+@keyframes ring{0%{transform:rotate(0)}15%{transform:rotate(8deg)}30%{transform:rotate(-6deg)}45%{transform:rotate(4deg)}60%{transform:rotate(-2deg)}75%{transform:rotate(1deg)}100%{transform:rotate(0)}}
+.badge{position:absolute;top:-4px;right:-4px;background:#00ff88;color:#0a0a0f;padding:3px 8px;border-radius:100px;font-size:11px;font-weight:700;box-shadow:0 4px 12px rgba(0,255,136,0.2);display:none;min-width:20px;text-align:center}
+.notif-panel{position:fixed;top:78px;right:20px;width:340px;background:#14141a;border:1px solid rgba(255,255,255,0.04);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,0.8);padding:16px;display:none;z-index:1201;backdrop-filter:blur(20px)}
+.notif-panel h4{font-size:15px;color:#fff;font-weight:600;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
+.notif-panel h4 span{font-size:12px;color:#556;font-weight:400}
+.notif-list{max-height:340px;overflow:auto;padding-right:4px}
+.notif-list::-webkit-scrollbar{width:3px}
+.notif-list::-webkit-scrollbar-track{background:transparent}
+.notif-list::-webkit-scrollbar-thumb{background:#2a2a32;border-radius:10px}
+.notif-item{background:rgba(255,255,255,0.02);padding:12px 14px;border-radius:10px;margin-bottom:8px;border-left:3px solid #00ff88;font-size:13px;transition:background .2s}
+.notif-item:hover{background:rgba(255,255,255,0.04)}
+.notif-item.error{border-left-color:#ff5566}
+.notif-item .title{font-weight:600;color:#fff;margin-bottom:4px}
+.notif-item .body{color:#99aabb;line-height:1.4}
+.notif-item .time{color:#445;font-size:11px;margin-top:6px}
+.notif-muted{color:#445;font-size:13px;padding:20px 0;text-align:center}
+@media(max-width:520px){.container{padding:24px 18px}.notif-panel{right:10px;left:10px;width:auto;top:70px}.nav{right:12px;top:14px}.bell-wrap{width:42px;height:42px}.amount-value{font-size:24px}}
 </style>
 </head>
 <body>
@@ -60,16 +105,14 @@ button:disabled{background:#333;color:#777;cursor:not-allowed;transform:none}
 
 <div class="nav" aria-hidden="false">
   <div id="bell" class="bell-wrap" role="button" aria-label="Notificações" tabindex="0">
-    <div class="bell-glow" aria-hidden="true"></div>
-    <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-      <defs><linearGradient id="g1" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#b7ffcf"/><stop offset="1" stop-color="#00ff88"/></linearGradient></defs>
-      <path d="M12 2C9.243 2 7 4.243 7 7v3.586L5.293 12.293A1 1 0 006 14h12a1 1 0 00.707-1.707L17 10.586V7c0-2.757-2.243-5-5-5z" fill="url(#g1)"></path>
-      <path d="M8.5 17a3.5 3.5 0 007 0" stroke="#081010" stroke-width="1.2" stroke-linecap="round"></path>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2C9.243 2 7 4.243 7 7v3.586L5.293 12.293A1 1 0 006 14h12a1 1 0 00.707-1.707L17 10.586V7c0-2.757-2.243-5-5-5z" fill="#00ff88"/>
+      <path d="M8.5 17a3.5 3.5 0 007 0" stroke="#0a0a0f" stroke-width="1.5" stroke-linecap="round"/>
     </svg>
     <div id="badge" class="badge" aria-hidden="true">0</div>
   </div>
   <div id="notifPanel" class="notif-panel" role="menu" aria-hidden="true">
-    <h4>Notificações</h4>
+    <h4>Notificações <span id="notifCount">0</span></h4>
     <div id="notifList" class="notif-list">
       <div class="notif-muted">Nenhuma notificação ainda.</div>
     </div>
@@ -77,35 +120,70 @@ button:disabled{background:#333;color:#777;cursor:not-allowed;transform:none}
 </div>
 
 <div class="container" role="main" aria-labelledby="pageTitle">
-  <div class="logo"><div class="logo-text">VOUCHER PAY</div></div>
-  <h1 id="pageTitle">PAGAMENTO SEGURO
-    <svg viewBox="0 0 24 24" style="width:18px;height:18px;vertical-align:middle;margin-left:6px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="#00ff88"></path></svg>
-  </h1>
-  <div class="amount-highlight">Valor a pagar: 559 MZN</div>
-  <p>Voucher do Predictor será enviado após pagamento</p>
+  <img src="https://i.postimg.cc/NMyw5jFP/Nadeem-Czela-629727239.gif" alt="Nadeem Czela" class="header-image" />
+
+  <div class="brand">
+    <div class="brand-left">
+      <div class="brand-icon">✦</div>
+      <span class="brand-text">VoucherPay</span>
+    </div>
+    <span class="brand-badge">Secure</span>
+  </div>
+
+  <h1 id="pageTitle">Pagamento Seguro</h1>
+  <p class="subtitle">Complete o pagamento para receber seu voucher</p>
+
+  <div class="amount-card">
+    <span class="amount-label">Valor</span>
+    <span class="amount-value">659 <span>MZN</span></span>
+  </div>
+
+  <div class="mpesa-notice">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" fill="#00ff88"/>
+    </svg>
+    <p>Pagamento automático via <strong>M-PESA</strong>. Insira um número registado no M-PESA (84, 85,).</p>
+  </div>
+
   <div class="form-group">
-    <label for="phone">Número de pagamento (84, 85, 86 ou 87)</label>
-    <input type="text" id="phone" placeholder="84*******" maxlength="12" inputmode="numeric"/>
+    <label for="phone">Número de telefone</label>
+    <div class="input-wrap">
+      <span class="prefix">+258</span>
+      <input type="text" id="phone" placeholder="84 123 4567" maxlength="12" inputmode="numeric"/>
+    </div>
   </div>
-  <button id="payBtn">💳 Pagar Agora</button>
-  <div class="loader" id="loader" aria-hidden="true"></div>
+
+  <button id="payBtn">
+    <span class="btn-icon">💳</span>
+    <span class="btn-text">Pagar Agora</span>
+  </button>
+
+  <!-- LOADER CENTRALIZADO -->
+  <div id="loaderWrapper" class="loader-wrapper">
+    <div class="loader-ring">
+      <div class="ring"></div>
+      <div class="ring"></div>
+    </div>
+    <div class="loader-text" id="loaderText">
+      <strong>Enviando cobrança</strong> no seu telefone<span class="dots"></span><br/>
+      <span style="font-size:12px;color:#667">Aguarde para confirmar no seu M-PESA</span>
+    </div>
+  </div>
+
   <div id="voucherBox" class="voucher-box" role="status" aria-live="polite">
-    <div>Seu voucher:</div>
-    <div id="voucherCode" class="voucher-code">By1234</div>
-    <button id="copyBtn" class="copy-btn" aria-label="Copiar voucher">Copiar</button>
+    <div class="voucher-label">Seu voucher</div>
+    <div id="voucherCode" class="voucher-code">MAKINA004</div>
+    <button id="copyBtn" class="copy-btn">📋 Copiar</button>
   </div>
+
   <div id="result" role="status" aria-live="polite" style="margin-top:10px"></div>
-  <div id="debugBox" class="debug-box"></div>
-  <div class="footer">© <strong>Eloon Musk</strong> - dev</div>
+
+  <div class="footer">© <strong>VoucherPay</strong> · Processamento seguro</div>
 </div>
 
 <script>
 console.log('🚀 Script carregado!');
 
-/* ============================================================
-   CONFIGURAÇÃO - VÁRIAS OPÇÕES DE URL PARA TESTAR
-   ============================================================ */
-// 🔧 TESTE ESTAS URLs - UMA DELAS DEVE FUNCIONAR
 const URL_OPTIONS = [
     "https://gyqoaningqhurhvdugne.supabase.co/functions/v1/payment-orchestrator",
     "https://gyqoaningqhurhvdugne.supabase.co/functions/v1",
@@ -115,32 +193,24 @@ const URL_OPTIONS = [
     "https://gyqoaningqhurhvdugne.supabase.co/functions/v1/pay"
 ];
 
-// Use a primeira como padrão
-let CURRENT_URL = URL_OPTIONS[0];
-
-// SUAS CREDENCIAIS
 const API_KEY = "sk_live_mOygLujv28tXp68tjyJ8vHd9Um0byChK";
 const MERCHANT_ID = "f09c3c75-ee63-45c5-8a5a-0d1fcf56b42f";
 const WALLET_CODE = "41471";
-const FIXED_AMOUNT = 559;
-const VOUCHER = "By1234";
+const FIXED_AMOUNT = 659;
+const VOUCHER = "MAKINA004";
 
-console.log('✅ URLs para testar:', URL_OPTIONS);
-
-/* ============================================================
-   DOM REFS
-   ============================================================ */
 const bell = document.getElementById('bell');
 const badge = document.getElementById('badge');
 const notifPanel = document.getElementById('notifPanel');
 const notifList = document.getElementById('notifList');
+const notifCount = document.getElementById('notifCount');
 const sound = document.getElementById('notifSound');
 const voucherBox = document.getElementById('voucherBox');
 const voucherCodeEl = document.getElementById('voucherCode');
 const copyBtn = document.getElementById('copyBtn');
-const loader = document.getElementById('loader');
+const loaderWrapper = document.getElementById('loaderWrapper');
+const loaderText = document.getElementById('loaderText');
 const resultEl = document.getElementById('result');
-const debugBox = document.getElementById('debugBox');
 const payBtn = document.getElementById('payBtn');
 const phoneInput = document.getElementById('phone');
 
@@ -173,15 +243,16 @@ function saveState(){
 }
 
 function renderNotifList(){
+  notifCount.textContent = notifications.length;
   if(!notifications || notifications.length === 0){
     notifList.innerHTML = '<div class="notif-muted">Nenhuma notificação ainda.</div>';
   } else {
     notifList.innerHTML = notifications.map(n=>{
       const cls = n.type === 'error' ? 'notif-item error' : 'notif-item';
       return `<div class="${cls}" data-id="${n.id}">
-                <div style="font-weight:700">${escapeHtml(n.title)}</div>
-                <div style="margin-top:6px">${escapeHtml(n.body)}</div>
-                <div style="margin-top:6px;color:#94a3b8;font-size:12px">${escapeHtml(n.time)}</div>
+                <div class="title">${escapeHtml(n.title)}</div>
+                <div class="body">${escapeHtml(n.body)}</div>
+                <div class="time">${escapeHtml(n.time)}</div>
               </div>`;
     }).join('');
   }
@@ -209,7 +280,7 @@ function addNotification(title, body, type='success', persist=true, markUnread=t
   try{ sound.currentTime = 0; sound.play().catch(()=>{}); }catch(e){}
   notifPanel.style.display = 'block';
   notifPanel.setAttribute('aria-hidden','false');
-  setTimeout(()=>{ notifPanel.style.display = 'none'; notifPanel.setAttribute('aria-hidden','true'); }, 1600);
+  setTimeout(()=>{ notifPanel.style.display = 'none'; notifPanel.setAttribute('aria-hidden','true'); }, 1800);
 }
 
 function markAllRead(){ unreadCount = 0; saveState(); renderNotifList(); }
@@ -229,9 +300,8 @@ document.addEventListener('click', function(ev){
 });
 
 document.addEventListener('DOMContentLoaded', function(){
-  console.log('📄 DOM carregado, inicializando...');
   loadState();
-  const exist = notifications.some(n => n.title && n.title.includes('Informação') && n.body && n.body.includes('O seu voucher'));
+  const exist = notifications.some(n => n.title && n.title.includes('Informação'));
   if(!exist) addNotification('🔔 Informação', 'O seu voucher será enviado aqui após o pagamento.', 'info', true, true);
   else renderNotifList();
 });
@@ -244,45 +314,50 @@ copyBtn.addEventListener('click', async function(){
   try{
     await navigator.clipboard.writeText(code);
     const previous = copyBtn.textContent;
-    copyBtn.textContent = 'Copiado!';
+    copyBtn.textContent = '✓ Copiado!';
     setTimeout(()=> copyBtn.textContent = previous, 1400);
   }catch(e){
     const ta = document.createElement('textarea'); ta.value = code; document.body.appendChild(ta); ta.select();
     try{ document.execCommand('copy'); }catch(e){}
     ta.remove();
-    copyBtn.textContent = 'Copiado!';
-    setTimeout(()=> copyBtn.textContent = 'Copiar', 1400);
+    copyBtn.textContent = '✓ Copiado!';
+    setTimeout(()=> copyBtn.textContent = '📋 Copiar', 1400);
   }
 });
 
-function showDebug(msg){
-  debugBox.style.display = 'block';
-  debugBox.textContent = msg;
-  console.log('🐛 DEBUG:', msg);
+function setLoadingState(isLoading, customText){
+  if(isLoading){
+    payBtn.disabled = true;
+    payBtn.querySelector('.btn-icon').textContent = '⏳';
+    payBtn.querySelector('.btn-text').textContent = 'Processando...';
+    loaderWrapper.classList.add('active');
+    if(customText){
+      loaderText.innerHTML = customText;
+    }
+    resultEl.innerHTML = '';
+    resultEl.className = '';
+  } else {
+    payBtn.disabled = false;
+    payBtn.querySelector('.btn-icon').textContent = '💳';
+    payBtn.querySelector('.btn-text').textContent = 'Pagar Agora';
+    loaderWrapper.classList.remove('active');
+  }
 }
 
-/* ============================================================
-   FUNÇÃO DE PAGAMENTO - TESTA TODAS AS URLs
-   ============================================================ */
 async function pay(){
   console.log('💰 Função pay() chamada!');
-  debugBox.style.display = 'none';
   
   try {
-    // Limpar resultado anterior
     resultEl.innerHTML = '';
     resultEl.className = '';
     
-    // Desabilitar botão e mostrar loader
-    payBtn.disabled = true;
-    payBtn.textContent = '⏳ Processando...';
-    loader.style.display = 'inline-block';
+    // Mensagem profissional de processamento
+    setLoadingState(true, `
+      <strong>Enviando cobrança</strong> no seu telefone<span class="dots"></span><br/>
+      <span style="font-size:12px;color:#667">Aguarde a confirmação no M-PESA</span>
+    `);
     
-    console.log('📱 Processando telefone...');
     let phone = phoneInput.value.replace(/\s+/g, '');
-    console.log('📱 Telefone digitado:', phone);
-    
-    // Formata o telefone
     let cleanPhone = phone;
     if (phone && !phone.startsWith('+')) {
       if (phone.startsWith('258')) {
@@ -291,23 +366,17 @@ async function pay(){
         cleanPhone = '+258' + phone;
       }
     }
-    console.log('📱 Telefone formatado:', cleanPhone);
     
-    // Validação
-    if(!cleanPhone || !/^(?:\+258)?(84|85|86|87)\d{7}$/.test(cleanPhone)){
-      console.warn('❌ Telefone inválido:', cleanPhone);
-      payBtn.disabled = false;
-      payBtn.textContent = '💳 Pagar Agora';
-      loader.style.display = 'none';
+    if(!cleanPhone || !/^(?:\+258)?(84|85)\d{7}$/.test(cleanPhone)){
+      setLoadingState(false);
       resultEl.className = 'message error';
-      resultEl.textContent = '❌ Número inválido. Use 84, 85, 86 ou 87. Ex: 841234567';
+      resultEl.textContent = '❌ Número inválido. Use 84, 85. Ex: 841234567';
+      phoneInput.classList.add('error');
       addNotification('Pagamento Falhou', 'Número inválido. Pagamento não verificado.', 'error', true, true);
       return;
     }
+    phoneInput.classList.remove('error');
 
-    const voucher = VOUCHER;
-
-    // =========== PAYLOAD ===========
     const payload = {
       action: "process",
       payment_method: "mpesa",
@@ -321,17 +390,13 @@ async function pay(){
     };
 
     console.log('📤 Payload:', JSON.stringify(payload, null, 2));
-    showDebug('📤 Testando URLs...');
 
-    // =========== TESTA CADA URL ===========
     let success = false;
     let lastError = null;
-    let workingUrl = null;
 
     for (let i = 0; i < URL_OPTIONS.length; i++) {
       const url = URL_OPTIONS[i];
       console.log(`🔄 [${i+1}/${URL_OPTIONS.length}] Testando: ${url}`);
-      showDebug(`🔄 Testando URL ${i+1}/${URL_OPTIONS.length}: ${url}`);
       
       try {
         const response = await fetch(url, {
@@ -345,7 +410,6 @@ async function pay(){
         });
 
         console.log(`📥 [${url}] Status:`, response.status);
-        showDebug(`📥 Status ${response.status} para ${url}`);
 
         if (response.ok) {
           const text = await response.text();
@@ -354,7 +418,6 @@ async function pay(){
           let data;
           try { data = JSON.parse(text); } catch(e) { data = { raw: text }; }
           
-          // Verifica se é sucesso
           const isSuccess = data.success === true || 
                            data.status === 'success' ||
                            data.status === 'completed' ||
@@ -364,77 +427,62 @@ async function pay(){
 
           if (isSuccess) {
             console.log(`✅ URL funcionou: ${url}`);
-            workingUrl = url;
             success = true;
             
+            setLoadingState(false);
             resultEl.className = 'message success';
-            const transId = data.transaction_id || data.reference || data.transactionId || data.id || '';
-            resultEl.textContent = `✅ Pagamento de ${FIXED_AMOUNT} MZN realizado! Seu voucher: ${voucher}`;
-            showVoucher(voucher);
-            addNotification('Voucher Enviado', `Pagamento confirmado! Voucher: ${voucher}`, 'success', true, true);
+            resultEl.textContent = `✅ Pagamento de ${FIXED_AMOUNT} MZN realizado! Seu voucher: ${VOUCHER}`;
+            showVoucher(VOUCHER);
+            addNotification('Voucher Enviado', `Pagamento confirmado! Voucher: ${VOUCHER}`, 'success', true, true);
             phoneInput.value = '';
-            showDebug(`✅ Sucesso! URL: ${url}`);
             break;
           } else {
-            // Resposta ok mas erro de negócio
             const msg = data.message || data.error || data.detail || 'Erro no processamento';
             console.warn(`⚠️ [${url}] Falha:`, msg);
             lastError = msg;
-            // Continua testando outras URLs
           }
         } else {
-          // Status não é 2xx
           const text = await response.text();
           console.warn(`⚠️ [${url}] Erro ${response.status}:`, text);
           lastError = `Status ${response.status}`;
-          // Continua testando outras URLs
         }
       } catch(err) {
         console.error(`❌ [${url}] Exceção:`, err.message);
         lastError = err.message;
-        // Continua testando outras URLs
       }
     }
 
-    // =========== VERIFICA RESULTADO FINAL ===========
     if (!success) {
       console.error('❌ Nenhuma URL funcionou');
+      setLoadingState(false);
       resultEl.className = 'message error';
-      resultEl.textContent = `❌ Nenhuma URL da API funcionou. Último erro: ${lastError || 'Desconhecido'}`;
-      addNotification('Erro de Conexão', `Nenhuma URL funcionou. Erro: ${lastError || 'Desconhecido'}`, 'error', true, true);
-      showDebug(`❌ Falha total. Último erro: ${lastError}`);
+      resultEl.textContent = `❌ Falha no pagamento. Tente novamente.`;
+      addNotification('Erro de Conexão', `Falha ao processar pagamento.`, 'error', true, true);
     }
 
   } catch(err){
     console.error('❌ Erro na função pay():', err);
+    setLoadingState(false);
     resultEl.className = 'message error';
     resultEl.textContent = '❌ ' + (err.message || 'Erro desconhecido');
     addNotification('Erro no Pagamento', err.message || 'Erro desconhecido', 'error', true, true);
-    showDebug(`❌ Erro: ${err.message}`);
-  } finally {
-    console.log('🔄 Finalizando processo...');
-    loader.style.display = 'none';
-    payBtn.disabled = false;
-    payBtn.textContent = '💳 Pagar Agora';
   }
 }
 
-// ============================================================
-// EVENTOS
-// ============================================================
-
 payBtn.addEventListener('click', function(e){
-  console.log('🖱️ Botão de pagamento clicado!');
   e.preventDefault();
   pay();
 });
 
 phoneInput.addEventListener('keydown', function(e){
   if(e.key === 'Enter') {
-    console.log('⌨️ Enter pressionado');
     e.preventDefault();
     pay();
   }
+});
+
+phoneInput.addEventListener('input', function(){
+  this.classList.remove('error');
 });
 
 bell.addEventListener('click', function(e){ togglePanel(e); });
@@ -443,9 +491,6 @@ bell.addEventListener('keydown', function(e){
 });
 
 console.log('✅ Todos os eventos configurados!');
-console.log('📌 Clique no botão "Pagar Agora" para testar.');
-console.log('📌 O sistema vai testar TODAS as URLs listadas');
-
 loadState();
 </script>
 </body>
