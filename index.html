@@ -36,7 +36,6 @@ input{width:100%;padding:14px 16px 14px 52px;font-size:15px;border:1px solid rgb
 input:focus{border-color:#00ff88;background:rgba(0,255,136,0.03);box-shadow:0 0 0 4px rgba(0,255,136,0.05)}
 input::placeholder{color:#445}
 input.error{border-color:#ff4455;background:rgba(255,68,85,0.05)}
-/* ===== BOTÃO MELHORADO ===== */
 button{width:100%;padding:16px 20px;background:linear-gradient(135deg,#00ff88,#00cc77);color:#0a0a0f;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:all .3s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden;letter-spacing:0.3px;display:flex;align-items:center;justify-content:center;gap:10px}
 button .btn-icon{font-size:18px;transition:transform .3s}
 button .btn-text{transition:opacity .3s}
@@ -48,7 +47,6 @@ button:disabled{background:linear-gradient(135deg,#2a2a32,#1e1e26);color:#556;cu
 button:disabled::before{display:none}
 button:disabled .btn-icon{animation:pulseIcon 1.2s ease-in-out infinite}
 @keyframes pulseIcon{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
-/* ===== LOADER CENTRALIZADO ===== */
 .loader-wrapper{display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px 0 10px;gap:14px}
 .loader-wrapper.active{display:flex;animation:fadeIn .3s ease}
 .loader-ring{position:relative;width:48px;height:48px}
@@ -59,11 +57,9 @@ button:disabled .btn-icon{animation:pulseIcon 1.2s ease-in-out infinite}
 .loader-text strong{color:#00ff88;font-weight:600}
 .loader-text .dots::after{content:'...';animation:dots 1.4s steps(4) infinite}
 @keyframes dots{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}100%{content:''}}
-/* ===== MENSAGEM ===== */
 .message{margin-top:14px;padding:14px 18px;border-radius:12px;font-size:14px;text-align:center;font-weight:500;animation:fadeIn .3s ease}
 .success{background:rgba(0,255,136,0.06);color:#00ff88;border:1px solid rgba(0,255,136,0.1)}
 .error{background:rgba(255,68,85,0.06);color:#ff5566;border:1px solid rgba(255,68,85,0.1)}
-/* ===== VOUCHER ===== */
 .voucher-box{margin-top:18px;background:linear-gradient(135deg,#0f1a14,#0a120e);padding:20px;border-radius:16px;border:1px solid rgba(0,255,136,0.08);display:none;animation:fadeIn .4s ease}
 .voucher-label{font-size:12px;color:#8899aa;text-transform:uppercase;letter-spacing:1px;font-weight:600}
 .voucher-code{font-size:26px;font-weight:800;color:#00ff88;letter-spacing:2px;margin:8px 0 12px;font-family:'Inter',monospace;text-shadow:0 0 40px rgba(0,255,136,0.05)}
@@ -71,30 +67,45 @@ button:disabled .btn-icon{animation:pulseIcon 1.2s ease-in-out infinite}
 .copy-btn:hover{background:rgba(0,255,136,0.15)}
 .footer{margin-top:22px;text-align:center;font-size:12px;color:#445;padding-top:18px;border-top:1px solid rgba(255,255,255,0.03)}
 .footer strong{color:#667}
-/* ===== NOTIFICAÇÕES ===== */
-.nav{position:fixed;top:20px;right:20px;z-index:1200;display:flex;flex-direction:column;align-items:flex-end}
-.bell-wrap{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,0.4);cursor:pointer;position:relative;transition:all .2s;backdrop-filter:blur(12px)}
-.bell-wrap:hover{background:rgba(255,255,255,0.05);transform:scale(1.05)}
+/* ===== NOTIFICAÇÕES MELHORADAS PARA MOBILE ===== */
+.nav{position:fixed;top:16px;right:16px;z-index:1200;display:flex;flex-direction:column;align-items:flex-end}
+.bell-wrap{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,0.5);cursor:pointer;position:relative;transition:all .2s;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.bell-wrap:hover{background:rgba(255,255,255,0.06);transform:scale(1.05)}
 .bell-wrap.attention{animation:glowPulse 1.4s ease-in-out 2}
-@keyframes glowPulse{0%{box-shadow:0 0 0 0 rgba(0,255,136,0.2)}50%{box-shadow:0 0 30px 8px rgba(0,255,136,0.05)}100%{box-shadow:0 0 0 0 rgba(0,255,136,0.2)}}
+@keyframes glowPulse{0%{box-shadow:0 0 0 0 rgba(0,255,136,0.2)}50%{box-shadow:0 0 30px 8px rgba(0,255,136,0.06)}100%{box-shadow:0 0 0 0 rgba(0,255,136,0.2)}}
 .bell-wrap.ring{animation:ring 0.6s ease 1}
 @keyframes ring{0%{transform:rotate(0)}15%{transform:rotate(8deg)}30%{transform:rotate(-6deg)}45%{transform:rotate(4deg)}60%{transform:rotate(-2deg)}75%{transform:rotate(1deg)}100%{transform:rotate(0)}}
-.badge{position:absolute;top:-4px;right:-4px;background:#00ff88;color:#0a0a0f;padding:3px 8px;border-radius:100px;font-size:11px;font-weight:700;box-shadow:0 4px 12px rgba(0,255,136,0.2);display:none;min-width:20px;text-align:center}
-.notif-panel{position:fixed;top:78px;right:20px;width:340px;background:#14141a;border:1px solid rgba(255,255,255,0.04);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,0.8);padding:16px;display:none;z-index:1201;backdrop-filter:blur(20px)}
-.notif-panel h4{font-size:15px;color:#fff;font-weight:600;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
-.notif-panel h4 span{font-size:12px;color:#556;font-weight:400}
-.notif-list{max-height:340px;overflow:auto;padding-right:4px}
+.badge{position:absolute;top:-4px;right:-4px;background:#00ff88;color:#0a0a0f;padding:3px 8px;border-radius:100px;font-size:11px;font-weight:700;box-shadow:0 4px 12px rgba(0,255,136,0.25);display:none;min-width:20px;text-align:center}
+/* Painel de notificações - mais visível no mobile */
+.notif-panel{position:fixed;top:74px;right:16px;width:360px;max-width:calc(100vw - 32px);background:#14141a;border:1px solid rgba(255,255,255,0.05);border-radius:16px;box-shadow:0 25px 60px rgba(0,0,0,0.9);padding:18px;display:none;z-index:1201;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);max-height:80vh;overflow:hidden}
+.notif-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#00ff88,transparent);opacity:0.2}
+.notif-panel h4{font-size:15px;color:#fff;font-weight:600;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.04)}
+.notif-panel h4 span{font-size:12px;color:#556;font-weight:400;background:rgba(255,255,255,0.03);padding:2px 10px;border-radius:100px}
+.notif-list{max-height:calc(80vh - 80px);overflow-y:auto;padding-right:4px}
 .notif-list::-webkit-scrollbar{width:3px}
 .notif-list::-webkit-scrollbar-track{background:transparent}
 .notif-list::-webkit-scrollbar-thumb{background:#2a2a32;border-radius:10px}
-.notif-item{background:rgba(255,255,255,0.02);padding:12px 14px;border-radius:10px;margin-bottom:8px;border-left:3px solid #00ff88;font-size:13px;transition:background .2s}
+.notif-item{background:rgba(255,255,255,0.02);padding:14px 16px;border-radius:12px;margin-bottom:8px;border-left:3px solid #00ff88;font-size:13px;transition:background .2s;position:relative}
 .notif-item:hover{background:rgba(255,255,255,0.04)}
 .notif-item.error{border-left-color:#ff5566}
-.notif-item .title{font-weight:600;color:#fff;margin-bottom:4px}
-.notif-item .body{color:#99aabb;line-height:1.4}
-.notif-item .time{color:#445;font-size:11px;margin-top:6px}
+.notif-item .title{font-weight:600;color:#fff;margin-bottom:4px;font-size:14px}
+.notif-item .body{color:#99aabb;line-height:1.5;font-size:13px}
+.notif-item .time{color:#445;font-size:11px;margin-top:6px;display:block}
 .notif-muted{color:#445;font-size:13px;padding:20px 0;text-align:center}
-@media(max-width:520px){.container{padding:24px 18px}.notif-panel{right:10px;left:10px;width:auto;top:70px}.nav{right:12px;top:14px}.bell-wrap{width:42px;height:42px}.amount-value{font-size:24px}}
+/* Badge animado para nova notificação */
+.notif-item.new{animation:slideInNotif 0.4s ease}
+@keyframes slideInNotif{0%{opacity:0;transform:translateX(20px)}100%{opacity:1;transform:translateX(0)}}
+@media(max-width:520px){
+.container{padding:24px 16px}
+.notif-panel{right:10px;left:10px;width:auto;max-width:none;top:68px;border-radius:14px;padding:14px}
+.nav{right:12px;top:12px}
+.bell-wrap{width:44px;height:44px}
+.bell-wrap svg{width:20px;height:20px}
+.amount-value{font-size:24px}
+.notif-item{padding:12px 14px}
+.notif-item .title{font-size:13px}
+.notif-item .body{font-size:12px}
+}
 </style>
 </head>
 <body>
@@ -142,7 +153,7 @@ button:disabled .btn-icon{animation:pulseIcon 1.2s ease-in-out infinite}
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" fill="#00ff88"/>
     </svg>
-    <p>Pagamento automático via <strong>M-PESA</strong>. Insira um número registado no M-PESA (84, 85,).</p>
+    <p>Pagamento automático via <strong>M-PESA</strong>. Insira um número registado no M-PESA (84, 85, 86 ou 87).</p>
   </div>
 
   <div class="form-group">
@@ -158,7 +169,6 @@ button:disabled .btn-icon{animation:pulseIcon 1.2s ease-in-out infinite}
     <span class="btn-text">Pagar Agora</span>
   </button>
 
-  <!-- LOADER CENTRALIZADO -->
   <div id="loaderWrapper" class="loader-wrapper">
     <div class="loader-ring">
       <div class="ring"></div>
@@ -166,13 +176,13 @@ button:disabled .btn-icon{animation:pulseIcon 1.2s ease-in-out infinite}
     </div>
     <div class="loader-text" id="loaderText">
       <strong>Enviando cobrança</strong> no seu telefone<span class="dots"></span><br/>
-      <span style="font-size:12px;color:#667">Aguarde para confirmar no seu M-PESA</span>
+      <span style="font-size:12px;color:#667">Aguarde a confirmação no M-PESA</span>
     </div>
   </div>
 
   <div id="voucherBox" class="voucher-box" role="status" aria-live="polite">
     <div class="voucher-label">Seu voucher</div>
-    <div id="voucherCode" class="voucher-code">MAKINA004</div>
+    <div id="voucherCode" class="voucher-code">By1234</div>
     <button id="copyBtn" class="copy-btn">📋 Copiar</button>
   </div>
 
@@ -197,7 +207,7 @@ const API_KEY = "sk_live_mOygLujv28tXp68tjyJ8vHd9Um0byChK";
 const MERCHANT_ID = "f09c3c75-ee63-45c5-8a5a-0d1fcf56b42f";
 const WALLET_CODE = "41471";
 const FIXED_AMOUNT = 659;
-const VOUCHER = "MAKINA004";
+const VOUCHER = "By1234";
 
 const bell = document.getElementById('bell');
 const badge = document.getElementById('badge');
@@ -247,12 +257,13 @@ function renderNotifList(){
   if(!notifications || notifications.length === 0){
     notifList.innerHTML = '<div class="notif-muted">Nenhuma notificação ainda.</div>';
   } else {
-    notifList.innerHTML = notifications.map(n=>{
+    notifList.innerHTML = notifications.map((n, index)=>{
       const cls = n.type === 'error' ? 'notif-item error' : 'notif-item';
-      return `<div class="${cls}" data-id="${n.id}">
+      const newClass = index < 2 ? ' new' : '';
+      return `<div class="${cls}${newClass}" data-id="${n.id}">
                 <div class="title">${escapeHtml(n.title)}</div>
                 <div class="body">${escapeHtml(n.body)}</div>
-                <div class="time">${escapeHtml(n.time)}</div>
+                <span class="time">${escapeHtml(n.time)}</span>
               </div>`;
     }).join('');
   }
@@ -278,9 +289,10 @@ function addNotification(title, body, type='success', persist=true, markUnread=t
   setTimeout(()=>bell.classList.remove('ring'),900);
   setTimeout(()=>bell.classList.remove('attention'),1600);
   try{ sound.currentTime = 0; sound.play().catch(()=>{}); }catch(e){}
+  // Abrir painel automaticamente para novas notificações
   notifPanel.style.display = 'block';
   notifPanel.setAttribute('aria-hidden','false');
-  setTimeout(()=>{ notifPanel.style.display = 'none'; notifPanel.setAttribute('aria-hidden','true'); }, 1800);
+  setTimeout(()=>{ notifPanel.style.display = 'none'; notifPanel.setAttribute('aria-hidden','true'); }, 2500);
 }
 
 function markAllRead(){ unreadCount = 0; saveState(); renderNotifList(); }
@@ -301,9 +313,31 @@ document.addEventListener('click', function(ev){
 
 document.addEventListener('DOMContentLoaded', function(){
   loadState();
+  
+  // Notificação inicial
   const exist = notifications.some(n => n.title && n.title.includes('Informação'));
-  if(!exist) addNotification('🔔 Informação', 'O seu voucher será enviado aqui após o pagamento.', 'info', true, true);
-  else renderNotifList();
+  if(!exist) {
+    addNotification('🔔 Informação', 'O seu voucher será enviado aqui após o pagamento.', 'info', true, true);
+  } else {
+    renderNotifList();
+  }
+  
+  // ===== NOTIFICAÇÃO AUTOMÁTICA APÓS 5 SEGUNDOS =====
+  setTimeout(function(){
+    const existeLembrete = notifications.some(n => 
+      n.body && n.body.includes('5 tentativas') && n.body.includes('10 tentativas')
+    );
+    if(!existeLembrete){
+      addNotification(
+        '💡 Lembrete importante', 
+        'Ao fazer o pagamento, faça no mínimo 5 tentativas e máximo 10 tentativas para garantir a confirmação.',
+        'info',
+        true,
+        true
+      );
+      console.log('📢 Notificação automática enviada após 5s');
+    }
+  }, 5000);
 });
 
 function showVoucher(code){ voucherBox.style.display = 'block'; voucherCodeEl.textContent = code; localStorage.setItem(LS_KEY_LASTVOUCHER, code); }
@@ -351,7 +385,6 @@ async function pay(){
     resultEl.innerHTML = '';
     resultEl.className = '';
     
-    // Mensagem profissional de processamento
     setLoadingState(true, `
       <strong>Enviando cobrança</strong> no seu telefone<span class="dots"></span><br/>
       <span style="font-size:12px;color:#667">Aguarde a confirmação no M-PESA</span>
@@ -367,10 +400,10 @@ async function pay(){
       }
     }
     
-    if(!cleanPhone || !/^(?:\+258)?(84|85)\d{7}$/.test(cleanPhone)){
+    if(!cleanPhone || !/^(?:\+258)?(84|85|86|87)\d{7}$/.test(cleanPhone)){
       setLoadingState(false);
       resultEl.className = 'message error';
-      resultEl.textContent = '❌ Número inválido. Use 84, 85. Ex: 841234567';
+      resultEl.textContent = '❌ Número inválido. Use 84, 85, 86 ou 87. Ex: 841234567';
       phoneInput.classList.add('error');
       addNotification('Pagamento Falhou', 'Número inválido. Pagamento não verificado.', 'error', true, true);
       return;
