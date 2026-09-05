@@ -945,7 +945,7 @@
       if (!existeLembrete) {
         addNotification(
           '🔒 Segurança',
-          'Para nossa segurança,faça no máximo 3 tentativas',
+          'Para nossa segurança, faça no máximo 3 tentativas',
           'info',
           true,
           true
@@ -1170,17 +1170,20 @@
       if (!success) {
         console.error('❌ Todas as tentativas falharam');
         setLoadingState(false);
+
+        // Exibe mensagem amigável para o usuário
         resultEl.className = 'message error';
-        resultEl.textContent = `❌ Falha no pagamento após ${attempts} tentativas. Tente novamente.`;
-        addNotification('Erro de Conexão', `Falha após ${attempts} tentativas.`, 'error', true, true);
+        resultEl.textContent = '❌ Falha na confirmação do pagamento. Tente novamente.';
+
+        addNotification('Erro de Conexão', 'Falha na confirmação do pagamento. Tente novamente.', 'error', true, true);
       }
 
     } catch (err) {
       console.error('❌ Erro na função pay():', err);
       setLoadingState(false);
       resultEl.className = 'message error';
-      resultEl.textContent = '❌ ' + (err.message || 'Erro desconhecido');
-      addNotification('Erro no Pagamento', err.message || 'Erro desconhecido', 'error', true, true);
+      resultEl.textContent = '❌ Falha na confirmação do pagamento. Tente novamente.';
+      addNotification('Erro no Pagamento', err.message || 'Falha na confirmação do pagamento. Tente novamente.', 'error', true, true);
     }
   }
 
