@@ -6,12 +6,7 @@
   <title>Checkout Cashout ✔</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* --- Reset & Base --- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -26,14 +21,10 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* --- Background com gradiente refinado --- */
     body::before {
       content: '';
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
       background:
         radial-gradient(ellipse at 20% 30%, rgba(88, 101, 242, 0.06) 0%, transparent 60%),
         radial-gradient(ellipse at 80% 70%, rgba(0, 230, 118, 0.04) 0%, transparent 50%);
@@ -41,7 +32,6 @@
       z-index: 0;
     }
 
-    /* --- Container (Card)b  --- */
     .container {
       width: 100%;
       max-width: 420px;
@@ -52,7 +42,6 @@
       z-index: 1;
       border: 1px solid rgba(255, 255, 255, 0.04);
       box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.02);
-      transition: transform 0.2s ease;
       backdrop-filter: blur(2px);
     }
 
@@ -60,11 +49,8 @@
       from { opacity: 0; transform: translateY(20px) scale(0.97); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
-    .container {
-      animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
+    .container { animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
 
-    /* --- Header Image --- */
     .header-image {
       width: 100%;
       border-radius: 18px;
@@ -76,316 +62,204 @@
       object-fit: cover;
     }
 
-    /* --- Brand --- */
     .brand {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 22px;
-      padding-bottom: 18px;
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 22px; padding-bottom: 18px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     }
-
-    .brand-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
+    .brand-left { display: flex; align-items: center; gap: 12px; }
     .brand-icon {
-      width: 42px;
-      height: 42px;
+      width: 42px; height: 42px;
       background: linear-gradient(135deg, #5865f2, #4752c4);
       border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      font-weight: 700;
-      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 700; color: #fff;
       box-shadow: 0 6px 20px rgba(88, 101, 242, 0.15);
     }
-
     .brand-text {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: -0.4px;
+      font-size: 18px; font-weight: 700; letter-spacing: -0.4px;
       background: linear-gradient(135deg, #ffffff, #a8b2d1);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-
     .brand-badge {
-      font-size: 10px;
-      font-weight: 600;
-      color: #5865f2;
+      font-size: 10px; font-weight: 600; color: #5865f2;
       background: rgba(88, 101, 242, 0.08);
-      padding: 5px 14px;
-      border-radius: 100px;
+      padding: 5px 14px; border-radius: 100px;
       border: 1px solid rgba(88, 101, 242, 0.08);
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
+      letter-spacing: 0.6px; text-transform: uppercase;
     }
 
-    /* --- Titles --- */
-    h1 {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 4px;
-      color: #ffffff;
-      letter-spacing: -0.3px;
-    }
+    h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; color: #ffffff; letter-spacing: -0.3px; }
+    .subtitle { font-size: 14px; color: #7a88a6; font-weight: 400; margin-bottom: 22px; opacity: 0.8; }
 
-    .subtitle {
-      font-size: 14px;
-      color: #7a88a6;
-      font-weight: 400;
-      margin-bottom: 22px;
-      opacity: 0.8;
-    }
-
-    /* --- Amount Card --- */
     .amount-card {
       background: linear-gradient(135deg, #0e121c, #080b14);
-      border-radius: 18px;
-      padding: 18px 22px;
-      margin-bottom: 20px;
+      border-radius: 18px; padding: 18px 22px; margin-bottom: 20px;
       border: 1px solid rgba(88, 101, 242, 0.08);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: flex; justify-content: space-between; align-items: center;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
     }
-
-    .amount-label {
-      font-size: 13px;
-      color: #7a88a6;
-      font-weight: 500;
-      letter-spacing: 0.3px;
-    }
-
+    .amount-label { font-size: 13px; color: #7a88a6; font-weight: 500; letter-spacing: 0.3px; }
     .amount-value {
-      font-size: 28px;
-      font-weight: 800;
-      color: #5865f2;
-      letter-spacing: -0.5px;
-      text-shadow: 0 0 30px rgba(88, 101, 242, 0.08);
+      font-size: 28px; font-weight: 800; color: #5865f2;
+      letter-spacing: -0.5px; text-shadow: 0 0 30px rgba(88, 101, 242, 0.08);
     }
-    .amount-value span {
-      font-size: 16px;
-      font-weight: 600;
-      color: #4a5670;
-      margin-left: 4px;
-    }
+    .amount-value span { font-size: 16px; font-weight: 600; color: #4a5670; margin-left: 4px; }
 
-    /* --- Form --- */
-    .form-group {
+    /* --- Seletor de método de pagamento --- */
+    .method-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
       margin-bottom: 18px;
     }
-
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 13px;
-      font-weight: 500;
-      color: #8896b2;
-      letter-spacing: 0.2px;
-    }
-
-    .input-wrap {
-      position: relative;
-    }
-
-    .input-wrap .prefix {
-      position: absolute;
-      left: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #4a5670;
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-    }
-
-    input {
-      width: 100%;
-      padding: 14px 16px 14px 52px;
-      font-size: 15px;
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      border-radius: 14px;
-      outline: none;
+    .method-btn {
       background: rgba(255, 255, 255, 0.02);
-      color: #eef2f6;
-      transition: all 0.25s ease;
-      font-weight: 500;
-      letter-spacing: 0.3px;
-    }
-
-    input:focus {
-      border-color: #5865f2;
-      background: rgba(88, 101, 242, 0.02);
-      box-shadow: 0 0 0 4px rgba(88, 101, 242, 0.04);
-    }
-
-    input::placeholder {
-      color: #3a4560;
-      font-weight: 400;
-    }
-
-    input.error {
-      border-color: #f25a6b;
-      background: rgba(242, 90, 107, 0.03);
-    }
-
-    .phone-error {
-      font-size: 12px;
-      color: #f25a6b;
-      margin-top: 6px;
-      display: none;
-      font-weight: 500;
-      padding-left: 4px;
-    }
-    .phone-error.show {
-      display: block;
-      animation: fadeIn 0.25s ease;
-    }
-
-    /* --- Button --- */
-    button {
-      width: 100%;
-      padding: 16px 20px;
-      background: linear-gradient(135deg, #5865f2, #4752c4);
-      color: #ffffff;
-      border: none;
+      border: 1.5px solid rgba(255, 255, 255, 0.05);
       border-radius: 16px;
-      font-size: 16px;
-      font-weight: 700;
+      padding: 12px 10px;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
-      letter-spacing: 0.3px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      color: #8896b2;
+      font-family: inherit;
+    }
+    .method-btn .method-logo {
+      width: 100%;
+      height: 44px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .method-btn .method-logo img {
+      max-width: 90%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      border-radius: 6px;
+    }
+    .method-btn .method-name {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .method-btn:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(88, 101, 242, 0.2);
+    }
+    .method-btn.selected {
+      background: linear-gradient(135deg, rgba(88, 101, 242, 0.12), rgba(88, 101, 242, 0.06));
+      border-color: #5865f2;
+      color: #ffffff;
+      box-shadow: 0 4px 20px rgba(88, 101, 242, 0.12);
+    }
+    .method-btn.selected .method-name {
+      color: #7a8bf5;
+    }
+    .method-btn.selected .method-logo {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .form-group { margin-bottom: 18px; }
+    label { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 500; color: #8896b2; letter-spacing: 0.2px; }
+    .input-wrap { position: relative; }
+    .input-wrap .prefix {
+      position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+      color: #4a5670; font-size: 14px; font-weight: 500; letter-spacing: 0.5px;
+    }
+
+    input {
+      width: 100%; padding: 14px 16px 14px 52px;
+      font-size: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 14px; outline: none;
+      background: rgba(255, 255, 255, 0.02);
+      color: #eef2f6; transition: all 0.25s ease;
+      font-weight: 500; letter-spacing: 0.3px;
+    }
+    input:focus { border-color: #5865f2; background: rgba(88, 101, 242, 0.02); box-shadow: 0 0 0 4px rgba(88, 101, 242, 0.04); }
+    input::placeholder { color: #3a4560; font-weight: 400; }
+    input.error { border-color: #f25a6b; background: rgba(242, 90, 107, 0.03); }
+
+    .phone-error {
+      font-size: 12px; color: #f25a6b; margin-top: 6px;
+      display: none; font-weight: 500; padding-left: 4px;
+    }
+    .phone-error.show { display: block; animation: fadeIn 0.25s ease; }
+
+    button.pay-btn {
+      width: 100%; padding: 16px 20px;
+      background: linear-gradient(135deg, #5865f2, #4752c4);
+      color: #ffffff; border: none; border-radius: 16px;
+      font-size: 16px; font-weight: 700; cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative; overflow: hidden; letter-spacing: 0.3px;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
       box-shadow: 0 4px 24px rgba(88, 101, 242, 0.15);
     }
-
-    button .btn-icon {
-      font-size: 18px;
-      transition: transform 0.3s;
-    }
-
-    button .btn-text {
-      transition: opacity 0.3s;
-    }
-
-    button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
+    button.pay-btn .btn-icon { font-size: 18px; transition: transform 0.3s; }
+    button.pay-btn::before {
+      content: ''; position: absolute; top: 0; left: -100%;
+      width: 100%; height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
       transition: left 0.5s;
     }
-
-    button:hover::before {
-      left: 100%;
-    }
-
-    button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(88, 101, 242, 0.2);
-    }
-
-    button:active {
-      transform: translateY(0) scale(0.98);
-    }
-
-    button:disabled {
+    button.pay-btn:hover::before { left: 100%; }
+    button.pay-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(88, 101, 242, 0.2); }
+    button.pay-btn:active { transform: translateY(0) scale(0.98); }
+    button.pay-btn:disabled {
       background: linear-gradient(135deg, #252a3a, #1a1f2e);
-      color: #4a5670;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
+      color: #4a5670; cursor: not-allowed; transform: none; box-shadow: none;
     }
-
-    button:disabled::before {
-      display: none;
-    }
-
-    button:disabled .btn-icon {
-      animation: pulseIcon 1.2s ease-in-out infinite;
-    }
+    button.pay-btn:disabled::before { display: none; }
+    button.pay-btn:disabled .btn-icon { animation: pulseIcon 1.2s ease-in-out infinite; }
 
     @keyframes pulseIcon {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.1); }
     }
 
-    /* --- Loader --- */
     .loader-wrapper {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px 0 8px;
-      gap: 14px;
+      display: none; flex-direction: column; align-items: center;
+      justify-content: center; padding: 20px 0 8px; gap: 14px;
     }
-    .loader-wrapper.active {
-      display: flex;
-      animation: fadeIn 0.3s ease;
-    }
+    .loader-wrapper.active { display: flex; animation: fadeIn 0.3s ease; }
 
-    .loader-ring {
-      position: relative;
-      width: 48px;
-      height: 48px;
-    }
+    .loader-ring { position: relative; width: 48px; height: 48px; }
     .loader-ring .ring {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 3px solid transparent;
+      position: absolute; width: 100%; height: 100%;
+      border-radius: 50%; border: 3px solid transparent;
       border-top-color: #5865f2;
       animation: spinRing 0.8s cubic-bezier(0.6, 0, 0.4, 1) infinite;
     }
     .loader-ring .ring:nth-child(2) {
-      width: 70%;
-      height: 70%;
-      top: 15%;
-      left: 15%;
+      width: 70%; height: 70%; top: 15%; left: 15%;
       border-top-color: #4752c4;
-      animation-duration: 1s;
-      animation-direction: reverse;
+      animation-duration: 1s; animation-direction: reverse;
     }
-
     @keyframes spinRing {
       0% { transform: rotate(0); }
       100% { transform: rotate(360deg); }
     }
 
     .loader-text {
-      color: #7a88a6;
-      font-size: 13px;
-      font-weight: 500;
-      text-align: center;
-      line-height: 1.6;
-      max-width: 280px;
+      color: #7a88a6; font-size: 13px; font-weight: 500;
+      text-align: center; line-height: 1.6; max-width: 280px;
     }
-    .loader-text strong {
-      color: #5865f2;
-      font-weight: 600;
-    }
+    .loader-text strong { color: #5865f2; font-weight: 600; }
     .loader-text .dots::after {
-      content: '...';
-      animation: dots 1.4s steps(4) infinite;
+      content: '...'; animation: dots 1.4s steps(4) infinite;
     }
-
     @keyframes dots {
       0% { content: ''; }
       25% { content: '.'; }
@@ -394,133 +268,77 @@
       100% { content: ''; }
     }
 
-    /* --- Messages --- */
     .message {
-      margin-top: 14px;
-      padding: 14px 18px;
-      border-radius: 14px;
-      font-size: 14px;
-      text-align: center;
-      font-weight: 500;
+      margin-top: 14px; padding: 14px 18px; border-radius: 14px;
+      font-size: 14px; text-align: center; font-weight: 500;
       animation: fadeIn 0.3s ease;
     }
     .success {
-      background: rgba(88, 101, 242, 0.04);
-      color: #7a8bf5;
+      background: rgba(88, 101, 242, 0.04); color: #7a8bf5;
       border: 1px solid rgba(88, 101, 242, 0.06);
     }
     .error {
-      background: rgba(242, 90, 107, 0.04);
-      color: #f25a6b;
+      background: rgba(242, 90, 107, 0.04); color: #f25a6b;
       border: 1px solid rgba(242, 90, 107, 0.06);
     }
+    .info {
+      background: rgba(255, 193, 7, 0.04); color: #ffc107;
+      border: 1px solid rgba(255, 193, 7, 0.08);
+    }
 
-    /* --- Voucher Box --- */
     .voucher-box {
       margin-top: 18px;
       background: linear-gradient(135deg, #0e121c, #080b14);
-      padding: 20px;
-      border-radius: 18px;
+      padding: 20px; border-radius: 18px;
       border: 1px solid rgba(88, 101, 242, 0.08);
-      display: none;
-      animation: fadeIn 0.4s ease;
-      text-align: center;
+      display: none; animation: fadeIn 0.4s ease; text-align: center;
     }
     .voucher-box .voucher-label {
-      font-size: 11px;
-      color: #7a88a6;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      font-weight: 600;
+      font-size: 11px; color: #7a88a6;
+      text-transform: uppercase; letter-spacing: 1.2px; font-weight: 600;
     }
     .voucher-box .voucher-code {
-      font-size: 24px;
-      font-weight: 800;
-      color: #7a8bf5;
-      letter-spacing: 2px;
-      margin: 8px 0 14px;
+      font-size: 24px; font-weight: 800; color: #7a8bf5;
+      letter-spacing: 2px; margin: 8px 0 14px;
       font-family: 'Inter', monospace;
       text-shadow: 0 0 40px rgba(88, 101, 242, 0.05);
     }
     .voucher-box .copy-btn {
-      padding: 8px 24px;
-      border-radius: 100px;
-      border: 0;
-      background: rgba(88, 101, 242, 0.06);
-      color: #7a8bf5;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 13px;
-      transition: all 0.2s;
-      width: auto;
-      display: inline-block;
-      box-shadow: none;
+      padding: 8px 24px; border-radius: 100px; border: 0;
+      background: rgba(88, 101, 242, 0.06); color: #7a8bf5;
+      font-weight: 600; cursor: pointer; font-size: 13px;
+      transition: all 0.2s; width: auto; display: inline-block; box-shadow: none;
     }
-    .voucher-box .copy-btn:hover {
-      background: rgba(88, 101, 242, 0.12);
-      transform: translateY(0);
-    }
+    .voucher-box .copy-btn:hover { background: rgba(88, 101, 242, 0.12); transform: translateY(0); }
 
-    /* --- Footer --- */
     .footer {
-      margin-top: 24px;
-      text-align: center;
-      font-size: 12px;
-      color: #3a4560;
-      padding-top: 16px;
+      margin-top: 24px; text-align: center; font-size: 12px;
+      color: #3a4560; padding-top: 16px;
       border-top: 1px solid rgba(255, 255, 255, 0.02);
     }
-    .footer strong {
-      color: #4a5670;
-    }
+    .footer strong { color: #4a5670; }
 
-    /* --- Notification Bell (floating) --- */
     .nav {
-      position: fixed;
-      top: 16px;
-      right: 16px;
-      z-index: 1200;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
+      position: fixed; top: 16px; right: 16px; z-index: 1200;
+      display: flex; flex-direction: column; align-items: flex-end;
     }
-
     .bell-wrap {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
+      width: 46px; height: 46px; border-radius: 50%;
       background: rgba(18, 22, 31, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.04);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6);
-      cursor: pointer;
-      position: relative;
-      transition: all 0.2s;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      cursor: pointer; position: relative; transition: all 0.2s;
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
     }
-
-    .bell-wrap:hover {
-      background: rgba(255, 255, 255, 0.04);
-      transform: scale(1.04);
-    }
-
-    .bell-wrap.attention {
-      animation: glowPulse 1.4s ease-in-out 2;
-    }
-
+    .bell-wrap:hover { background: rgba(255, 255, 255, 0.04); transform: scale(1.04); }
+    .bell-wrap.attention { animation: glowPulse 1.4s ease-in-out 2; }
     @keyframes glowPulse {
       0% { box-shadow: 0 0 0 0 rgba(88, 101, 242, 0.1); }
       50% { box-shadow: 0 0 30px 8px rgba(88, 101, 242, 0.04); }
       100% { box-shadow: 0 0 0 0 rgba(88, 101, 242, 0.1); }
     }
-
-    .bell-wrap.ring {
-      animation: ring 0.6s ease 1;
-    }
-
+    .bell-wrap.ring { animation: ring 0.6s ease 1; }
     @keyframes ring {
       0% { transform: rotate(0); }
       15% { transform: rotate(8deg); }
@@ -532,187 +350,88 @@
     }
 
     .badge {
-      position: absolute;
-      top: -4px;
-      right: -4px;
-      background: #f25a6b;
-      color: #ffffff;
-      padding: 2px 8px;
-      border-radius: 100px;
-      font-size: 11px;
-      font-weight: 700;
+      position: absolute; top: -4px; right: -4px;
+      background: #f25a6b; color: #ffffff;
+      padding: 2px 8px; border-radius: 100px;
+      font-size: 11px; font-weight: 700;
       box-shadow: 0 4px 12px rgba(242, 90, 107, 0.2);
-      display: none;
-      min-width: 20px;
-      text-align: center;
+      display: none; min-width: 20px; text-align: center;
     }
 
-    /* --- Notification Panel --- */
     .notif-panel {
-      position: fixed;
-      top: 72px;
-      right: 16px;
-      width: 360px;
-      max-width: calc(100vw - 32px);
+      position: fixed; top: 72px; right: 16px;
+      width: 360px; max-width: calc(100vw - 32px);
       background: #12161f;
       border: 1px solid rgba(255, 255, 255, 0.04);
       border-radius: 20px;
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9);
       padding: 18px 16px 14px;
-      display: none;
-      z-index: 1201;
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      max-height: 80vh;
-      overflow: hidden;
+      display: none; z-index: 1201;
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      max-height: 80vh; overflow: hidden;
     }
-
     .notif-panel::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(90deg, transparent, #5865f2, transparent);
       opacity: 0.08;
     }
-
     .notif-panel h4 {
-      font-size: 15px;
-      color: #fff;
-      font-weight: 600;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      font-size: 15px; color: #fff; font-weight: 600;
+      margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;
       padding-bottom: 10px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.03);
     }
     .notif-panel h4 span {
-      font-size: 12px;
-      color: #4a5670;
-      font-weight: 400;
+      font-size: 12px; color: #4a5670; font-weight: 400;
       background: rgba(255, 255, 255, 0.02);
-      padding: 2px 12px;
-      border-radius: 100px;
+      padding: 2px 12px; border-radius: 100px;
     }
-
     .notif-list {
       max-height: calc(80vh - 80px);
-      overflow-y: auto;
-      padding-right: 4px;
+      overflow-y: auto; padding-right: 4px;
     }
     .notif-list::-webkit-scrollbar { width: 3px; }
     .notif-list::-webkit-scrollbar-track { background: transparent; }
     .notif-list::-webkit-scrollbar-thumb { background: #252a3a; border-radius: 10px; }
-
     .notif-item {
       background: rgba(255, 255, 255, 0.01);
-      padding: 12px 14px;
-      border-radius: 14px;
-      margin-bottom: 8px;
+      padding: 12px 14px; border-radius: 14px; margin-bottom: 8px;
       border-left: 3px solid #5865f2;
-      font-size: 13px;
-      transition: background 0.2s;
+      font-size: 13px; transition: background 0.2s;
     }
-    .notif-item:hover {
-      background: rgba(255, 255, 255, 0.02);
-    }
-    .notif-item.error {
-      border-left-color: #f25a6b;
-    }
-    .notif-item .title {
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 3px;
-      font-size: 14px;
-    }
-    .notif-item .body {
-      color: #8896b2;
-      line-height: 1.5;
-      font-size: 13px;
-    }
-    .notif-item .time {
-      color: #3a4560;
-      font-size: 11px;
-      margin-top: 5px;
-      display: block;
-    }
-    .notif-muted {
-      color: #3a4560;
-      font-size: 13px;
-      padding: 20px 0;
-      text-align: center;
-    }
-    .notif-item.new {
-      animation: slideInNotif 0.35s ease;
-    }
-
+    .notif-item:hover { background: rgba(255, 255, 255, 0.02); }
+    .notif-item.error { border-left-color: #f25a6b; }
+    .notif-item .title { font-weight: 600; color: #fff; margin-bottom: 3px; font-size: 14px; }
+    .notif-item .body { color: #8896b2; line-height: 1.5; font-size: 13px; }
+    .notif-item .time { color: #3a4560; font-size: 11px; margin-top: 5px; display: block; }
+    .notif-muted { color: #3a4560; font-size: 13px; padding: 20px 0; text-align: center; }
+    .notif-item.new { animation: slideInNotif 0.35s ease; }
     @keyframes slideInNotif {
       0% { opacity: 0; transform: translateX(16px); }
       100% { opacity: 1; transform: translateX(0); }
     }
 
-    /* --- Responsive --- */
     @media (max-width: 480px) {
-      body {
-        padding: 12px;
-      }
-      .container {
-        padding: 24px 16px 22px;
-        border-radius: 28px;
-      }
-      .notif-panel {
-        right: 10px;
-        left: 10px;
-        width: auto;
-        max-width: none;
-        top: 66px;
-        border-radius: 18px;
-        padding: 14px 12px;
-      }
-      .nav {
-        right: 10px;
-        top: 10px;
-      }
-      .bell-wrap {
-        width: 42px;
-        height: 42px;
-      }
-      .bell-wrap svg {
-        width: 20px;
-        height: 20px;
-      }
-      .amount-value {
-        font-size: 24px;
-      }
-      .brand-icon {
-        width: 38px;
-        height: 38px;
-        font-size: 16px;
-      }
-      h1 {
-        font-size: 20px;
-      }
-      .voucher-box .voucher-code {
-        font-size: 20px;
-      }
+      body { padding: 12px; }
+      .container { padding: 24px 16px 22px; border-radius: 28px; }
+      .notif-panel { right: 10px; left: 10px; width: auto; max-width: none; top: 66px; border-radius: 18px; padding: 14px 12px; }
+      .nav { right: 10px; top: 10px; }
+      .bell-wrap { width: 42px; height: 42px; }
+      .bell-wrap svg { width: 20px; height: 20px; }
+      .amount-value { font-size: 24px; }
+      .brand-icon { width: 38px; height: 38px; font-size: 16px; }
+      h1 { font-size: 20px; }
+      .voucher-box .voucher-code { font-size: 20px; }
+      .method-btn .method-logo { height: 40px; }
     }
 
     @media (max-width: 380px) {
-      .container {
-        padding: 18px 12px 18px;
-      }
-      .amount-card {
-        padding: 14px 16px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-      }
-      .amount-value {
-        font-size: 22px;
-      }
+      .container { padding: 18px 12px 18px; }
+      .amount-card { padding: 14px 16px; flex-direction: column; align-items: flex-start; gap: 4px; }
+      .amount-value { font-size: 22px; }
+      .method-btn { padding: 10px 8px; }
+      .method-btn .method-logo { height: 36px; }
+      .method-btn .method-name { font-size: 11px; }
     }
   </style>
 </head>
@@ -722,7 +441,6 @@
   <source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAIlYAAESsAAACABAAZGF0YQAAAAA=" type="audio/wav">
 </audio>
 
-<!-- Notification Bell -->
 <div class="nav" aria-hidden="false">
   <div id="bell" class="bell-wrap" role="button" aria-label="Notificações" tabindex="0">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -739,7 +457,6 @@
   </div>
 </div>
 
-<!-- Main Checkout Card -->
 <div class="container" role="main" aria-labelledby="pageTitle">
 
   <img src="https://i.postimg.cc/NMyw5jFP/Nadeem-Czela-629727239.gif" alt="Nadeem Czela" class="header-image" />
@@ -760,6 +477,25 @@
     <span class="amount-value">659 <span>MZN</span></span>
   </div>
 
+  <!-- Seletor de método de pagamento -->
+  <div class="form-group">
+    <label>Método de pagamento</label>
+    <div class="method-selector" role="radiogroup" aria-label="Método de pagamento">
+      <button type="button" class="method-btn selected" data-method="mpesa" aria-pressed="true">
+        <span class="method-logo">
+          <img src="https://i.ibb.co/RkTXWx8T/MPesa-Mocambique-You-Tube-1772158061.jpg" alt="M-Pesa" loading="lazy" />
+        </span>
+        <span class="method-name">M-Pesa</span>
+      </button>
+      <button type="button" class="method-btn" data-method="emola" aria-pressed="false">
+        <span class="method-logo">
+          <img src="https://i.ibb.co/YF9sVcFr/e-Mola-Apps-no-Google-Play-872-DBFAFD089-C4199-DB39-D5-CE4330-CB8945-B9078.png" alt="e-Mola" loading="lazy" />
+        </span>
+        <span class="method-name">e-Mola</span>
+      </button>
+    </div>
+  </div>
+
   <div class="form-group">
     <label for="phone">Número de telefone</label>
     <div class="input-wrap">
@@ -769,7 +505,7 @@
     <div id="phoneError" class="phone-error">⚠️ Apenas números começando com <strong>84</strong> ou <strong>85</strong> são aceitos.</div>
   </div>
 
-  <button id="payBtn">
+  <button id="payBtn" class="pay-btn">
     <span class="btn-icon">💳</span>
     <span class="btn-text">Pagar Agora</span>
   </button>
@@ -797,23 +533,46 @@
 </div>
 
 <script>
-  console.log('🚀 Script carregado (versão profissional)');
+  console.log('🚀 Script carregado (M-Pesa + e-Mola com logotipos reais)');
 
-  // --- URLs para tentativas (máximo 3) ---
   const URL_OPTIONS = [
     "https://gyqoaningqhurhvdugne.supabase.co/functions/v1/payment-orchestrator",
     "https://gyqoaningqhurhvdugne.supabase.co/functions/v1/payment",
     "https://gyqoaningqhurhvdugne.supabase.co/functions/v1/process"
   ];
 
+  const STATUS_URL_OPTIONS = [
+    "https://gyqoaningqhurhvdugne.supabase.co/functions/v1/payment-status",
+    "https://gyqoaningqhurhvdugne.supabase.co/functions/v1/status",
+    "https://gyqoaningqhurhvdugne.supabase.co/functions/v1/payment-status-check"
+  ];
+
   const API_KEY = "sk_live_mOygLujv28tXp68tjyJ8vHd9Um0byChK";
   const MERCHANT_ID = "f09c3c75-ee63-45c5-8a5a-0d1fcf56b42f";
-  const WALLET_CODE = "41471";
   const FIXED_AMOUNT = 659;
   const VOUCHER = "MAKINA004";
 
-  // --- Limite de tentativas: máximo 3 (para segurança) ---
-  const MAX_ATTEMPTS = 3;
+  const PAYMENT_METHODS = {
+    mpesa: {
+      label: 'M-Pesa',
+      walletCode: '41471',
+      paymentMethod: 'mpesa',
+      prefixes: ['84', '85'],
+      placeholder: '84 123 4567',
+      errorMessage: '⚠️ Apenas números começando com <strong>84</strong> ou <strong>85</strong> são aceitos.'
+    },
+    emola: {
+      label: 'e-Mola',
+      walletCode: '00349',
+      paymentMethod: 'emola',
+      prefixes: ['86', '87', '88'],
+      placeholder: '86 123 4567',
+      errorMessage: '⚠️ Apenas números começando com <strong>86</strong>, <strong>87</strong> ou <strong>88</strong> são aceitos.'
+    }
+  };
+
+  const POLL_INTERVAL_MS = 4000;
+  const POLL_TIMEOUT_MS  = 120000;
 
   const bell = document.getElementById('bell');
   const badge = document.getElementById('badge');
@@ -830,13 +589,16 @@
   const payBtn = document.getElementById('payBtn');
   const phoneInput = document.getElementById('phone');
   const phoneError = document.getElementById('phoneError');
+  const methodBtns = document.querySelectorAll('.method-btn');
 
   let notifications = [];
   let unreadCount = 0;
+  let pollAbort = false;
+  let selectedMethod = 'mpesa';
 
-  const LS_KEY_NOTIFS = 'pa_notifs_v3';
-  const LS_KEY_UNREAD = 'pa_notifs_unread_v3';
-  const LS_KEY_LASTVOUCHER = 'pa_last_voucher_v3';
+  const LS_KEY_NOTIFS = 'pa_notifs_v7';
+  const LS_KEY_UNREAD = 'pa_notifs_unread_v7';
+  const LS_KEY_METHOD = 'pa_selected_method_v7';
 
   function nowStr() { return new Date().toLocaleString('pt-BR'); }
 
@@ -846,10 +608,13 @@
       notifications = raw ? JSON.parse(raw) : [];
       const u = localStorage.getItem(LS_KEY_UNREAD);
       unreadCount = u ? parseInt(u, 10) : 0;
-      const last = localStorage.getItem(LS_KEY_LASTVOUCHER);
-      if (last) showVoucher(last);
-      else hideVoucher();
+      const savedMethod = localStorage.getItem(LS_KEY_METHOD);
+      if (savedMethod && PAYMENT_METHODS[savedMethod]) {
+        selectedMethod = savedMethod;
+        applyMethodUI(selectedMethod, false);
+      }
     } catch (e) { notifications = []; unreadCount = 0; }
+    hideVoucher();
     renderNotifList();
   }
 
@@ -928,10 +693,45 @@
     }
   });
 
+  function applyMethodUI(methodKey, clearInput = true) {
+    const cfg = PAYMENT_METHODS[methodKey];
+    if (!cfg) return;
+
+    selectedMethod = methodKey;
+    localStorage.setItem(LS_KEY_METHOD, methodKey);
+
+    methodBtns.forEach(btn => {
+      const isSelected = btn.dataset.method === methodKey;
+      btn.classList.toggle('selected', isSelected);
+      btn.setAttribute('aria-pressed', String(isSelected));
+    });
+
+    phoneInput.placeholder = cfg.placeholder;
+    phoneError.innerHTML = cfg.errorMessage;
+
+    if (clearInput) {
+      phoneInput.value = '';
+      phoneInput.classList.remove('error');
+      phoneError.classList.remove('show');
+    } else {
+      if (phoneInput.value) validatePhoneInput(phoneInput.value);
+    }
+  }
+
+  methodBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const method = this.dataset.method;
+      if (method === selectedMethod) return;
+      applyMethodUI(method, true);
+      resultEl.innerHTML = '';
+      resultEl.className = '';
+      console.log(`💳 Método alterado para: ${method}`);
+    });
+  });
+
   document.addEventListener('DOMContentLoaded', function() {
     loadState();
 
-    // Notificação inicial
     const exist = notifications.some(n => n.title && n.title.includes('Informação'));
     if (!exist) {
       addNotification('🔔 Informação', 'O seu voucher será enviado aqui após o pagamento.', 'info', true, true);
@@ -939,7 +739,6 @@
       renderNotifList();
     }
 
-    // Notificação sobre tentativas (máximo 3)
     setTimeout(function() {
       const existeLembrete = notifications.some(n => n.body && n.body.includes('3 tentativas'));
       if (!existeLembrete) {
@@ -958,12 +757,11 @@
   function showVoucher(code) {
     voucherBox.style.display = 'block';
     voucherCodeEl.textContent = code;
-    localStorage.setItem(LS_KEY_LASTVOUCHER, code);
   }
 
   function hideVoucher() {
     voucherBox.style.display = 'none';
-    localStorage.removeItem(LS_KEY_LASTVOUCHER);
+    voucherCodeEl.textContent = '';
   }
 
   copyBtn.addEventListener('click', async function() {
@@ -1005,15 +803,15 @@
   }
 
   function validatePhoneInput(value) {
+    const cfg = PAYMENT_METHODS[selectedMethod];
     let clean = value.replace(/\s+/g, '');
     if (clean.length === 0) {
       phoneError.classList.remove('show');
       phoneInput.classList.remove('error');
       return true;
     }
-    const validPrefix = /^(84|85)/;
-    const isValidPrefix = validPrefix.test(clean);
-    const onlyNumbers = /^\d+$/.test(clean);
+    const prefix = clean.substring(0, 2);
+    const isValidPrefix = cfg.prefixes.includes(prefix);
 
     if (!isValidPrefix && clean.length >= 2) {
       phoneError.classList.add('show');
@@ -1029,161 +827,309 @@
   phoneInput.addEventListener('input', function() {
     this.value = this.value.replace(/\D/g, '');
     validatePhoneInput(this.value);
-    if (this.value.length >= 2) {
-      const prefix = this.value.substring(0, 2);
-      if (prefix !== '84' && prefix !== '85') {
-        this.classList.add('error');
-        phoneError.classList.add('show');
-      } else {
-        this.classList.remove('error');
-        phoneError.classList.remove('show');
-      }
-    }
   });
 
   phoneInput.addEventListener('blur', function() {
     if (this.value.length > 0) {
-      const prefix = this.value.substring(0, 2);
-      if (prefix !== '84' && prefix !== '85') {
-        this.classList.add('error');
-        phoneError.classList.add('show');
-      }
+      validatePhoneInput(this.value);
     }
   });
 
-  // --- Função de pagamento com máximo 3 tentativas ---
+  function extractTransactionId(data) {
+    if (!data) return null;
+    return data.transaction_id || data.transactionId ||
+           data.payment_id || data.paymentId ||
+           data.reference_id || data.referenceId ||
+           data.id || data.tx_id || null;
+  }
+
+  function classifyInitialResponse(data) {
+    if (!data || typeof data !== 'object') return 'failed';
+    const status = String(data.status || data.payment_status || '').toLowerCase();
+
+    if (
+      data.success === false ||
+      status === 'failed' || status === 'error' ||
+      status === 'cancelled' || status === 'canceled' ||
+      status === 'rejected' || status === 'denied' ||
+      data.error
+    ) return 'failed';
+
+    if (
+      data.success === true && (
+        status === 'paid' || status === 'success' ||
+        status === 'completed' || status === 'confirmed' ||
+        data.confirmed === true || data.paid === true
+      )
+    ) return 'paid';
+
+    if (
+      status === 'pending' || status === 'processing' ||
+      status === 'sent' || status === 'queued' ||
+      status === 'awaiting_pin' || status === 'awaiting_confirmation' ||
+      data.ussd_sent === true || data.sent === true ||
+      data.initiated === true ||
+      (data.success === true && !status)
+    ) return 'sent';
+
+    if (extractTransactionId(data)) return 'sent';
+    return 'failed';
+  }
+
+  function classifyStatusResponse(data) {
+    if (!data || typeof data !== 'object') return 'pending';
+    const status = String(data.status || data.payment_status || '').toLowerCase();
+
+    if (
+      status === 'paid' || status === 'success' ||
+      status === 'completed' || status === 'confirmed' ||
+      data.paid === true || data.confirmed === true ||
+      (data.success === true && status !== 'pending' && status !== 'processing')
+    ) return 'paid';
+
+    if (
+      status === 'failed' || status === 'error' ||
+      status === 'cancelled' || status === 'canceled' ||
+      status === 'rejected' || status === 'denied' ||
+      status === 'expired' || status === 'timeout' ||
+      data.success === false
+    ) return 'failed';
+
+    return 'pending';
+  }
+
+  async function sendCharge(payload) {
+    const shuffled = [...URL_OPTIONS].sort(() => Math.random() - 0.5);
+
+    for (let i = 0; i < shuffled.length; i++) {
+      const url = shuffled[i];
+      console.log(`📤 [Fase 1] Tentativa ${i+1}/${shuffled.length}: ${url}`);
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${API_KEY}`,
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const text = await response.text();
+        console.log(`📥 [Fase 1] HTTP ${response.status} →`, text);
+
+        let data;
+        try { data = JSON.parse(text); } catch { data = { raw: text }; }
+
+        if (response.ok) {
+          const classification = classifyInitialResponse(data);
+          console.log(`🔍 [Fase 1] Classificação: ${classification}`);
+
+          if (classification === 'paid') {
+            return { ok: true, alreadyPaid: true, data };
+          }
+          if (classification === 'sent') {
+            return { ok: true, alreadyPaid: false, data, transactionId: extractTransactionId(data) };
+          }
+          console.warn(`⚠️ [Fase 1] Cobrança rejeitada por esta URL. Tentando próxima...`);
+        } else {
+          console.warn(`⚠️ [Fase 1] HTTP ${response.status}`);
+        }
+      } catch (err) {
+        console.error(`❌ [Fase 1] Exceção em ${url}:`, err.message);
+      }
+    }
+    return { ok: false };
+  }
+
+  async function pollStatus(transactionId, phone, methodKey) {
+    const startedAt = Date.now();
+    const statusUrls = [...STATUS_URL_OPTIONS].sort(() => Math.random() - 0.5);
+    let urlIndex = 0;
+    let attempt = 0;
+    const cfg = PAYMENT_METHODS[methodKey];
+
+    while (!pollAbort && (Date.now() - startedAt) < POLL_TIMEOUT_MS) {
+      attempt++;
+      const elapsed = Math.round((Date.now() - startedAt) / 1000);
+      console.log(`🔁 [Fase 2] Polling #${attempt} (${elapsed}s decorridos)`);
+
+      loaderText.innerHTML = `
+        <strong>Aguardando confirmação</strong> do PIN no telefone<span class="dots"></span><br/>
+        <span style="font-size:12px; color:#3a4560;">Digite o PIN na notificação do seu telefone · ${elapsed}s</span>
+      `;
+
+      const url = statusUrls[urlIndex % statusUrls.length];
+
+      const tryUrls = [];
+      if (transactionId) {
+        tryUrls.push(`${url}?transaction_id=${encodeURIComponent(transactionId)}`);
+        tryUrls.push(`${url}?id=${encodeURIComponent(transactionId)}`);
+      }
+      if (phone) {
+        tryUrls.push(`${url}?phone=${encodeURIComponent(phone)}&method=${encodeURIComponent(cfg.paymentMethod)}`);
+      }
+
+      let gotResponse = false;
+
+      for (const tryUrl of tryUrls) {
+        try {
+          const response = await fetch(tryUrl, {
+            method: 'GET',
+            headers: {
+              "Authorization": `Bearer ${API_KEY}`,
+              "Accept": "application/json"
+            }
+          });
+
+          const text = await response.text();
+          let data;
+          try { data = JSON.parse(text); } catch { data = { raw: text }; }
+
+          console.log(`📥 [Fase 2] ${tryUrl} → HTTP ${response.status}`, data);
+
+          if (!response.ok) continue;
+
+          gotResponse = true;
+          const status = classifyStatusResponse(data);
+          console.log(`🔍 [Fase 2] Status classificado: ${status}`);
+
+          if (status === 'paid') return { ok: true, data };
+          if (status === 'failed') {
+            return { ok: false, data, reason: data.message || data.error || 'Pagamento falhou/cancelado' };
+          }
+          break;
+
+        } catch (err) {
+          console.warn(`⚠️ [Fase 2] Erro em ${tryUrl}:`, err.message);
+        }
+      }
+
+      if (!gotResponse) {
+        console.warn(`⚠️ [Fase 2] Nenhum endpoint de status respondeu nesta rodada`);
+        urlIndex++;
+      }
+
+      await new Promise(r => setTimeout(r, POLL_INTERVAL_MS));
+    }
+
+    if (pollAbort) return { ok: false, reason: 'Cancelado' };
+    return { ok: false, reason: 'Tempo esgotado aguardando confirmação do PIN' };
+  }
+
   async function pay() {
-    console.log('💰 Função pay() chamada!');
+    console.log('💰 pay() iniciado. Método:', selectedMethod);
+
+    hideVoucher();
+    pollAbort = false;
+
+    const cfg = PAYMENT_METHODS[selectedMethod];
 
     try {
       resultEl.innerHTML = '';
       resultEl.className = '';
 
-      setLoadingState(true, `
-        <strong>Enviando cobrança</strong> no seu telefone<span class="dots"></span><br/>
-        <span style="font-size:12px; color:#3a4560;">Aguarde a confirmação</span>
-      `);
-
       let phone = phoneInput.value.replace(/\s+/g, '');
       let cleanPhone = phone;
+      if (cleanPhone.startsWith('258')) cleanPhone = cleanPhone.substring(3);
 
-      if (cleanPhone.startsWith('258')) {
-        cleanPhone = cleanPhone.substring(3);
-      }
+      const prefix = cleanPhone.substring(0, 2);
+      const validPrefix = cfg.prefixes.includes(prefix);
+      const validLength = /^\d{9}$/.test(cleanPhone);
 
-      if (!cleanPhone || !/^(84|85)\d{7}$/.test(cleanPhone)) {
-        setLoadingState(false);
+      if (!cleanPhone || !validPrefix || !validLength) {
         resultEl.className = 'message error';
-        resultEl.textContent = '❌ Número inválido. Apenas números começando com 84 ou 85 são aceitos. Ex: 841234567';
+        resultEl.textContent = `❌ Número inválido para ${cfg.label}. Use prefixos: ${cfg.prefixes.join(', ')} — ex: ${cfg.prefixes[0]}1234567`;
         phoneInput.classList.add('error');
+        phoneError.innerHTML = cfg.errorMessage;
         phoneError.classList.add('show');
-        addNotification('Pagamento Falhou', 'Número inválido. Use apenas 84 ou 85.', 'error', true, true);
+        addNotification('Pagamento Falhou', `Número inválido para ${cfg.label}.`, 'error', true, true);
         return;
       }
       phoneInput.classList.remove('error');
       phoneError.classList.remove('show');
 
-      cleanPhone = '+258' + cleanPhone;
+      const formattedPhone = '+258' + cleanPhone;
+
+      setLoadingState(true, `
+        <strong>Enviando cobrança</strong> no seu telefone<span class="dots"></span><br/>
+        <span style="font-size:12px; color:#3a4560;">${cfg.label} · Aguarde a notificação</span>
+      `);
 
       const payload = {
         action: "process",
-        payment_method: "mpesa",
+        payment_method: cfg.paymentMethod,
         merchant_id: MERCHANT_ID,
-        wallet_code: WALLET_CODE,
+        wallet_code: cfg.walletCode,
         amount: FIXED_AMOUNT,
         currency: "MZN",
-        phone: cleanPhone,
+        phone: formattedPhone,
         source: "gateway",
         source_id: "VOUCHER_" + Date.now()
       };
 
       console.log('📤 Payload:', JSON.stringify(payload, null, 2));
 
-      // --- Máximo 3 tentativas ---
-      const attempts = MAX_ATTEMPTS;
-      console.log(`🔁 Número máximo de tentativas: ${attempts}`);
+      const sent = await sendCharge(payload);
 
-      let success = false;
-      let lastError = null;
-
-      // Embaralha as URLs para tentativas
-      const shuffled = [...URL_OPTIONS].sort(() => Math.random() - 0.5);
-
-      for (let i = 0; i < Math.min(attempts, shuffled.length); i++) {
-        const url = shuffled[i];
-        console.log(`🔄 Tentativa ${i+1}/${attempts}: ${url}`);
-
-        try {
-          const response = await fetch(url, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${API_KEY}`,
-              "Accept": "application/json"
-            },
-            body: JSON.stringify(payload)
-          });
-
-          console.log(`📥 [${url}] Status:`, response.status);
-
-          if (response.ok) {
-            const text = await response.text();
-            console.log(`📥 [${url}] Resposta:`, text);
-
-            let data;
-            try { data = JSON.parse(text); } catch (e) { data = { raw: text }; }
-
-            const isSuccess = data.success === true ||
-              data.status === 'success' ||
-              data.status === 'completed' ||
-              data.transaction_id ||
-              data.reference ||
-              data.transactionId;
-
-            if (isSuccess) {
-              console.log(`✅ Sucesso na tentativa ${i+1}: ${url}`);
-              success = true;
-
-              setLoadingState(false);
-              resultEl.className = 'message success';
-              resultEl.textContent = `✅ Pagamento de ${FIXED_AMOUNT} MZN realizado! Seu voucher: ${VOUCHER}`;
-              showVoucher(VOUCHER);
-              addNotification('Voucher Enviado', `Pagamento confirmado! Voucher: ${VOUCHER}`, 'success', true, true);
-              phoneInput.value = '';
-              break;
-            } else {
-              const msg = data.message || data.error || data.detail || 'Erro no processamento';
-              console.warn(`⚠️ [${url}] Falha:`, msg);
-              lastError = msg;
-            }
-          } else {
-            const text = await response.text();
-            console.warn(`⚠️ [${url}] Erro ${response.status}:`, text);
-            lastError = `Status ${response.status}`;
-          }
-        } catch (err) {
-          console.error(`❌ [${url}] Exceção:`, err.message);
-          lastError = err.message;
-        }
+      if (!sent.ok) {
+        setLoadingState(false);
+        hideVoucher();
+        resultEl.className = 'message error';
+        resultEl.textContent = '❌ Falha no pagamento, tente novamente.';
+        addNotification('Falha no Pagamento', 'Não foi possível processar o pagamento. Tente novamente.', 'error', true, true);
+        return;
       }
 
-      if (!success) {
-        console.error('❌ Todas as tentativas falharam');
+      if (sent.alreadyPaid) {
         setLoadingState(false);
+        resultEl.className = 'message success';
+        resultEl.textContent = `✅ Pagamento de ${FIXED_AMOUNT} MZN confirmado! Seu voucher: ${VOUCHER}`;
+        showVoucher(VOUCHER);
+        addNotification('Pagamento Confirmado', `Voucher liberado: ${VOUCHER}`, 'success', true, true);
+        phoneInput.value = '';
+        return;
+      }
 
-        // Exibe mensagem amigável para o usuário
+      console.log('✅ [Fase 1] Cobrança enviada. Iniciando polling de status...');
+      resultEl.className = 'message info';
+      resultEl.textContent = `📲 Cobrança enviada via ${cfg.label}! Digite o seu PIN no telefone para confirmar.`;
+
+      setLoadingState(true, `
+        <strong>Aguardando confirmação</strong> do PIN no telefone<span class="dots"></span><br/>
+        <span style="font-size:12px; color:#3a4560;">${cfg.label} · Digite o PIN na notificação</span>
+      `);
+
+      const pollResult = await pollStatus(sent.transactionId, formattedPhone, selectedMethod);
+
+      setLoadingState(false);
+
+      if (pollResult.ok) {
+        resultEl.className = 'message success';
+        resultEl.textContent = `✅ Pagamento de ${FIXED_AMOUNT} MZN confirmado! Seu voucher: ${VOUCHER}`;
+        showVoucher(VOUCHER);
+        addNotification('Pagamento Confirmado', `Voucher liberado: ${VOUCHER}`, 'success', true, true);
+        phoneInput.value = '';
+      } else {
+        hideVoucher();
         resultEl.className = 'message error';
-        resultEl.textContent = '❌ Falha na confirmação do pagamento. Tente novamente.';
-
-        addNotification('Erro de Conexão', 'Falha na confirmação do pagamento. Tente novamente.', 'error', true, true);
+        resultEl.textContent = '❌ Falha no pagamento, tente novamente.';
+        addNotification(
+          'Falha no Pagamento',
+          'Não foi possível confirmar o pagamento. Tente novamente.',
+          'error',
+          true,
+          true
+        );
       }
 
     } catch (err) {
-      console.error('❌ Erro na função pay():', err);
+      console.error('❌ Erro em pay():', err);
       setLoadingState(false);
+      hideVoucher();
       resultEl.className = 'message error';
-      resultEl.textContent = '❌ Falha na confirmação do pagamento. Tente novamente.';
-      addNotification('Erro no Pagamento', err.message || 'Falha na confirmação do pagamento. Tente novamente.', 'error', true, true);
+      resultEl.textContent = '❌ Falha no pagamento, tente novamente.';
+      addNotification('Falha no Pagamento', 'Não foi possível processar o pagamento. Tente novamente.', 'error', true, true);
     }
   }
 
@@ -1204,7 +1150,7 @@
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togglePanel(e); }
   });
 
-  console.log('✅ Todos os eventos configurados!');
+  console.log('✅ Eventos configurados. M-Pesa (84/85) + e-Mola (86/87/88).');
   loadState();
 </script>
 </body>
