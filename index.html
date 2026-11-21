@@ -107,104 +107,64 @@
     }
     .amount-value span { font-size: 16px; font-weight: 600; color: #4a5670; margin-left: 4px; }
 
-    /* --- Seletor de método de pagamento --- */
-    .method-selector {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-    .method-btn {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1.5px solid rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
-      padding: 12px 10px;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
+    /* Banner de método detectado automaticamente */
+    .detected-method {
+      display: none;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      color: #8896b2;
-      font-family: inherit;
-      position: relative;
-      overflow: hidden;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(88, 101, 242, 0.10), rgba(88, 101, 242, 0.04));
+      border: 1px solid rgba(88, 101, 242, 0.25);
+      margin-bottom: 14px;
+      animation: fadeIn 0.3s ease;
     }
-    .method-btn .method-logo {
-      width: 100%;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .detected-method.show { display: flex; }
+    .detected-method .dm-logo {
+      width: 42px; height: 42px;
       border-radius: 10px;
       overflow: hidden;
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(255, 255, 255, 0.04);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
     }
-    .method-btn .method-logo img {
-      max-width: 90%;
-      max-height: 100%;
-      width: auto;
-      height: auto;
+    .detected-method .dm-logo img {
+      max-width: 100%; max-height: 100%;
       object-fit: contain;
-      display: block;
       border-radius: 6px;
     }
-    .method-btn .method-name {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.3px;
+    .detected-method .dm-info {
+      display: flex; flex-direction: column; gap: 2px;
+      flex: 1; min-width: 0;
     }
-
-    /* Indicador de seleção (checkmark) no canto do botão */
-    .method-btn .method-check {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      width: 20px;
-      height: 20px;
+    .detected-method .dm-label {
+      font-size: 10px;
+      color: #7a88a6;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+    .detected-method .dm-name {
+      font-size: 15px;
+      color: #7a8bf5;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+    }
+    .detected-method .dm-check {
+      width: 24px; height: 24px;
       border-radius: 50%;
       background: #5865f2;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 800;
-      opacity: 0;
-      transform: scale(0.4);
-      transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      pointer-events: none;
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 800;
       box-shadow: 0 4px 14px rgba(88, 101, 242, 0.45);
-      z-index: 2;
-    }
-    .method-btn.selected .method-check {
-      opacity: 1;
-      transform: scale(1);
       animation: popCheck 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      flex-shrink: 0;
     }
-
     @keyframes popCheck {
       0% { transform: scale(0.3); opacity: 0; }
       60% { transform: scale(1.15); opacity: 1; }
       100% { transform: scale(1); opacity: 1; }
-    }
-
-    .method-btn:hover {
-      background: rgba(255, 255, 255, 0.04);
-      border-color: rgba(88, 101, 242, 0.2);
-    }
-    .method-btn.selected {
-      background: linear-gradient(135deg, rgba(88, 101, 242, 0.12), rgba(88, 101, 242, 0.06));
-      border-color: #5865f2;
-      color: #ffffff;
-      box-shadow: 0 4px 20px rgba(88, 101, 242, 0.12);
-    }
-    .method-btn.selected .method-name {
-      color: #7a8bf5;
-    }
-    .method-btn.selected .method-logo {
-      background: rgba(255, 255, 255, 0.04);
     }
 
     .form-group { margin-bottom: 18px; }
@@ -459,17 +419,14 @@
       .brand-icon { width: 38px; height: 38px; font-size: 16px; }
       h1 { font-size: 20px; }
       .voucher-box .voucher-code { font-size: 20px; }
-      .method-btn .method-logo { height: 40px; }
-      .method-btn .method-check { width: 18px; height: 18px; font-size: 11px; top: 6px; right: 6px; }
+      .detected-method .dm-logo { width: 38px; height: 38px; }
     }
 
     @media (max-width: 380px) {
       .container { padding: 18px 12px 18px; }
       .amount-card { padding: 14px 16px; flex-direction: column; align-items: flex-start; gap: 4px; }
       .amount-value { font-size: 22px; }
-      .method-btn { padding: 10px 8px; }
-      .method-btn .method-logo { height: 36px; }
-      .method-btn .method-name { font-size: 11px; }
+      .detected-method { padding: 10px 12px; }
     }
   </style>
 </head>
@@ -515,34 +472,25 @@
     <span class="amount-value">659 <span>MZN</span></span>
   </div>
 
-  <!-- Seletor de método de pagamento -->
-  <div class="form-group">
-    <label>Método de pagamento</label>
-    <div class="method-selector" role="radiogroup" aria-label="Método de pagamento">
-      <button type="button" class="method-btn selected" data-method="mpesa" aria-pressed="true">
-        <span class="method-check">✓</span>
-        <span class="method-logo">
-          <img src="https://i.ibb.co/RkTXWx8T/MPesa-Mocambique-You-Tube-1772158061.jpg" alt="M-Pesa" loading="lazy" />
-        </span>
-        <span class="method-name">M-Pesa</span>
-      </button>
-      <button type="button" class="method-btn" data-method="emola" aria-pressed="false">
-        <span class="method-check">✓</span>
-        <span class="method-logo">
-          <img src="https://i.ibb.co/YF9sVcFr/e-Mola-Apps-no-Google-Play-872-DBFAFD089-C4199-DB39-D5-CE4330-CB8945-B9078.png" alt="e-Mola" loading="lazy" />
-        </span>
-        <span class="method-name">e-Mola</span>
-      </button>
-    </div>
-  </div>
-
   <div class="form-group">
     <label for="phone">Número de telefone</label>
     <div class="input-wrap">
       <span class="prefix">+258</span>
-      <input type="text" id="phone" placeholder="84 123 4567" maxlength="12" inputmode="numeric" />
+      <input type="text" id="phone" placeholder="84 123 4567" maxlength="12" inputmode="numeric" autocomplete="off" />
     </div>
-    <div id="phoneError" class="phone-error">⚠️ Apenas números começando com <strong>84</strong> ou <strong>85</strong> são aceitos.</div>
+    <div id="phoneError" class="phone-error">⚠️ Número inválido. Use prefixos <strong>84</strong>, <strong>85</strong> (M-Pesa) ou <strong>86</strong>, <strong>87</strong>, <strong>88</strong> (e-Mola).</div>
+  </div>
+
+  <!-- Banner de método detectado automaticamente -->
+  <div id="detectedMethod" class="detected-method" aria-live="polite">
+    <div class="dm-logo">
+      <img id="dmLogo" src="" alt="" />
+    </div>
+    <div class="dm-info">
+      <span class="dm-label">Método detectado</span>
+      <span class="dm-name" id="dmName">—</span>
+    </div>
+    <div class="dm-check">✓</div>
   </div>
 
   <button id="payBtn" class="pay-btn">
@@ -573,7 +521,7 @@
 </div>
 
 <script>
-  console.log('🚀 Script carregado (M-Pesa + e-Mola com checkmark animado)');
+  console.log('🚀 Script carregado (detecção automática M-Pesa / e-Mola pelo prefixo)');
 
   const URL_OPTIONS = [
     "https://gyqoaningqhurhvdugne.supabase.co/functions/v1/payment-orchestrator",
@@ -592,22 +540,29 @@
   const FIXED_AMOUNT = 659;
   const VOUCHER = "MAKINA004";
 
+  // Mapeamento prefixo → método
+  const PREFIX_METHOD = {
+    '84': 'mpesa',
+    '85': 'mpesa',
+    '86': 'emola',
+    '87': 'emola',
+    '88': 'emola'
+  };
+
   const PAYMENT_METHODS = {
     mpesa: {
       label: 'M-Pesa',
       walletCode: '41471',
       paymentMethod: 'mpesa',
       prefixes: ['84', '85'],
-      placeholder: '84 123 4567',
-      errorMessage: '⚠️ Apenas números começando com <strong>84</strong> ou <strong>85</strong> são aceitos.'
+      logo: 'https://i.ibb.co/RkTXWx8T/MPesa-Mocambique-You-Tube-1772158061.jpg'
     },
     emola: {
       label: 'e-Mola',
       walletCode: '00349',
       paymentMethod: 'emola',
       prefixes: ['86', '87', '88'],
-      placeholder: '86 123 4567',
-      errorMessage: '⚠️ Apenas números começando com <strong>86</strong>, <strong>87</strong> ou <strong>88</strong> são aceitos.'
+      logo: 'https://i.ibb.co/YF9sVcFr/e-Mola-Apps-no-Google-Play-872-DBFAFD089-C4199-DB39-D5-CE4330-CB8945-B9078.png'
     }
   };
 
@@ -629,16 +584,17 @@
   const payBtn = document.getElementById('payBtn');
   const phoneInput = document.getElementById('phone');
   const phoneError = document.getElementById('phoneError');
-  const methodBtns = document.querySelectorAll('.method-btn');
+  const detectedMethod = document.getElementById('detectedMethod');
+  const dmLogo = document.getElementById('dmLogo');
+  const dmName = document.getElementById('dmName');
 
   let notifications = [];
   let unreadCount = 0;
   let pollAbort = false;
-  let selectedMethod = 'mpesa';
+  let selectedMethod = null;  // detectado dinamicamente
 
-  const LS_KEY_NOTIFS = 'pa_notifs_v8';
-  const LS_KEY_UNREAD = 'pa_notifs_unread_v8';
-  const LS_KEY_METHOD = 'pa_selected_method_v8';
+  const LS_KEY_NOTIFS = 'pa_notifs_v9';
+  const LS_KEY_UNREAD = 'pa_notifs_unread_v9';
 
   function nowStr() { return new Date().toLocaleString('pt-BR'); }
 
@@ -648,13 +604,9 @@
       notifications = raw ? JSON.parse(raw) : [];
       const u = localStorage.getItem(LS_KEY_UNREAD);
       unreadCount = u ? parseInt(u, 10) : 0;
-      const savedMethod = localStorage.getItem(LS_KEY_METHOD);
-      if (savedMethod && PAYMENT_METHODS[savedMethod]) {
-        selectedMethod = savedMethod;
-        applyMethodUI(selectedMethod, false);
-      }
     } catch (e) { notifications = []; unreadCount = 0; }
     hideVoucher();
+    hideDetectedMethod();
     renderNotifList();
   }
 
@@ -733,55 +685,6 @@
     }
   });
 
-  function applyMethodUI(methodKey, clearInput = true) {
-    const cfg = PAYMENT_METHODS[methodKey];
-    if (!cfg) return;
-
-    selectedMethod = methodKey;
-    localStorage.setItem(LS_KEY_METHOD, methodKey);
-
-    methodBtns.forEach(btn => {
-      const isSelected = btn.dataset.method === methodKey;
-      btn.classList.toggle('selected', isSelected);
-      btn.setAttribute('aria-pressed', String(isSelected));
-
-      // Reinicia a animação do checkmark para cada troca
-      if (isSelected) {
-        const check = btn.querySelector('.method-check');
-        if (check) {
-          check.style.animation = 'none';
-          void check.offsetWidth; // força reflow
-          check.style.animation = '';
-        }
-      }
-    });
-
-    phoneInput.placeholder = cfg.placeholder;
-    phoneError.innerHTML = cfg.errorMessage;
-
-    if (clearInput) {
-      phoneInput.value = '';
-      phoneInput.classList.remove('error');
-      phoneError.classList.remove('show');
-    } else {
-      if (phoneInput.value) validatePhoneInput(phoneInput.value);
-    }
-  }
-
-  methodBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
-      const method = this.dataset.method;
-      if (method === selectedMethod) return;
-      applyMethodUI(method, true);
-      resultEl.innerHTML = '';
-      resultEl.className = '';
-      console.log(`💳 Método alterado para: ${method}`);
-      if (navigator.vibrate) {
-        try { navigator.vibrate(30); } catch (e) {}
-      }
-    });
-  });
-
   document.addEventListener('DOMContentLoaded', function() {
     loadState();
 
@@ -815,6 +718,22 @@
   function hideVoucher() {
     voucherBox.style.display = 'none';
     voucherCodeEl.textContent = '';
+  }
+
+  function showDetectedMethod(methodKey) {
+    const cfg = PAYMENT_METHODS[methodKey];
+    if (!cfg) return hideDetectedMethod();
+    dmLogo.src = cfg.logo;
+    dmLogo.alt = cfg.label;
+    dmName.textContent = cfg.label;
+    detectedMethod.classList.add('show');
+  }
+
+  function hideDetectedMethod() {
+    detectedMethod.classList.remove('show');
+    dmLogo.src = '';
+    dmLogo.alt = '';
+    dmName.textContent = '—';
   }
 
   copyBtn.addEventListener('click', async function() {
@@ -855,26 +774,45 @@
     }
   }
 
+  // Detecta o método com base no prefixo do número digitado
+  function detectMethod(cleanPhone) {
+    if (!cleanPhone || cleanPhone.length < 2) return null;
+    const prefix = cleanPhone.substring(0, 2);
+    return PREFIX_METHOD[prefix] || null;
+  }
+
+  // Valida o número conforme o método detectado automaticamente
   function validatePhoneInput(value) {
-    const cfg = PAYMENT_METHODS[selectedMethod];
-    let clean = value.replace(/\s+/g, '');
+    const clean = value.replace(/\s+/g, '');
     if (clean.length === 0) {
       phoneError.classList.remove('show');
       phoneInput.classList.remove('error');
+      selectedMethod = null;
+      hideDetectedMethod();
       return true;
     }
-    const prefix = clean.substring(0, 2);
-    const isValidPrefix = cfg.prefixes.includes(prefix);
-
-    if (!isValidPrefix && clean.length >= 2) {
-      phoneError.classList.add('show');
-      phoneInput.classList.add('error');
-      return false;
-    } else {
+    if (clean.length < 2) {
       phoneError.classList.remove('show');
       phoneInput.classList.remove('error');
+      selectedMethod = null;
+      hideDetectedMethod();
       return true;
     }
+
+    const method = detectMethod(clean);
+    if (!method) {
+      phoneError.classList.add('show');
+      phoneInput.classList.add('error');
+      selectedMethod = null;
+      hideDetectedMethod();
+      return false;
+    }
+
+    phoneError.classList.remove('show');
+    phoneInput.classList.remove('error');
+    selectedMethod = method;
+    showDetectedMethod(method);
+    return true;
   }
 
   phoneInput.addEventListener('input', function() {
@@ -1071,12 +1009,10 @@
   }
 
   async function pay() {
-    console.log('💰 pay() iniciado. Método:', selectedMethod);
+    console.log('💰 pay() iniciado. Método detectado:', selectedMethod);
 
     hideVoucher();
     pollAbort = false;
-
-    const cfg = PAYMENT_METHODS[selectedMethod];
 
     try {
       resultEl.innerHTML = '';
@@ -1086,19 +1022,21 @@
       let cleanPhone = phone;
       if (cleanPhone.startsWith('258')) cleanPhone = cleanPhone.substring(3);
 
-      const prefix = cleanPhone.substring(0, 2);
-      const validPrefix = cfg.prefixes.includes(prefix);
+      // Re-detecta o método no momento do clique (garantia)
+      const methodKey = detectMethod(cleanPhone);
       const validLength = /^\d{9}$/.test(cleanPhone);
 
-      if (!cleanPhone || !validPrefix || !validLength) {
+      if (!cleanPhone || !methodKey || !validLength) {
         resultEl.className = 'message error';
-        resultEl.textContent = `❌ Número inválido para ${cfg.label}. Use prefixos: ${cfg.prefixes.join(', ')} — ex: ${cfg.prefixes[0]}1234567`;
+        resultEl.textContent = '❌ Número inválido. Use prefixos 84/85 (M-Pesa) ou 86/87/88 (e-Mola).';
         phoneInput.classList.add('error');
-        phoneError.innerHTML = cfg.errorMessage;
         phoneError.classList.add('show');
-        addNotification('Pagamento Falhou', `Número inválido para ${cfg.label}.`, 'error', true, true);
+        addNotification('Pagamento Falhou', 'Número inválido ou prefixo não reconhecido.', 'error', true, true);
         return;
       }
+
+      const cfg = PAYMENT_METHODS[methodKey];
+
       phoneInput.classList.remove('error');
       phoneError.classList.remove('show');
 
@@ -1141,6 +1079,8 @@
         showVoucher(VOUCHER);
         addNotification('Pagamento Confirmado', `Voucher liberado: ${VOUCHER}`, 'success', true, true);
         phoneInput.value = '';
+        selectedMethod = null;
+        hideDetectedMethod();
         return;
       }
 
@@ -1153,7 +1093,7 @@
         <span style="font-size:12px; color:#3a4560;">${cfg.label} · Digite o PIN na notificação</span>
       `);
 
-      const pollResult = await pollStatus(sent.transactionId, formattedPhone, selectedMethod);
+      const pollResult = await pollStatus(sent.transactionId, formattedPhone, methodKey);
 
       setLoadingState(false);
 
@@ -1163,6 +1103,8 @@
         showVoucher(VOUCHER);
         addNotification('Pagamento Confirmado', `Voucher liberado: ${VOUCHER}`, 'success', true, true);
         phoneInput.value = '';
+        selectedMethod = null;
+        hideDetectedMethod();
       } else {
         hideVoucher();
         resultEl.className = 'message error';
@@ -1203,7 +1145,7 @@
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togglePanel(e); }
   });
 
-  console.log('✅ Eventos configurados. M-Pesa (84/85) + e-Mola (86/87/88).');
+  console.log('✅ Detecção automática configurada: 84/85 → M-Pesa, 86/87/88 → e-Mola');
   loadState();
 </script>
 </body>
